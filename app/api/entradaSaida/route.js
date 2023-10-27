@@ -1,5 +1,5 @@
-import EntradaSaida from "../../../../models/entradaSaida";
-import { connectToDB } from "../../../../utils/database";
+import EntradaSaida from "../../../models/entradaSaida";
+import { connectToDB } from "../../../utils/database";
 
 export const GET = async (req, res) => {
   try {

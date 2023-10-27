@@ -2,16 +2,10 @@
 "use client";
 import {
   Card,
-  CardBody,
-  Select,
-  SelectItem,
   Spacer,
   Divider,
-  CardFooter,
-  CircularProgress,
   Input,
   Textarea,
-  CardHeader,
   Link,
   Image,
 } from "@nextui-org/react";
@@ -279,7 +273,6 @@ function SolicitarEmprestimo() {
                       <div className="bg-yellow-800">
                         <Card className="w-[400px]">
                           <div className="bg-yellow-900">
-                            <CardHeader className="flex gap-3">
                               <Image
                                 className="rounded-full"
                                 alt="Profilo Pic"
@@ -293,10 +286,8 @@ function SolicitarEmprestimo() {
                                   {session?.user.email}
                                 </p>
                               </div>
-                            </CardHeader>
                           </div>
                           <Divider />
-                          <CardBody>
                             <p>
                               {" "}
                               <small className="font-bold text-lg">
@@ -336,10 +327,8 @@ function SolicitarEmprestimo() {
                                 </button>
                               </div>
                             </p>
-                          </CardBody>
                           <Divider />
                           <div className="bg-yellow-900">
-                            <CardFooter>
                               <Link href="#">
                                 <p className="font-bold">
                                   Emprestimo Solicitado:{" "}
@@ -349,7 +338,6 @@ function SolicitarEmprestimo() {
                                   }).format(parseFloat(saldo))}
                                 </p>
                               </Link>
-                            </CardFooter>
                           </div>
                         </Card>
                       </div>
@@ -385,7 +373,6 @@ function SolicitarEmprestimo() {
                             </h2>
                             <Spacer y={4} />
                             <Card className="bg-yellow-900">
-                              <CardBody>
                                 <Spacer y={4} />
                                 <div className="flex flex-row">
                                   <div className="w-1/2 text-center">
@@ -462,7 +449,7 @@ function SolicitarEmprestimo() {
                                   <div className="w-1/2 text-center">
                                     <div className="bg-yellow-900 rounded-full p-1">
                                       <div className="flex flex-row">
-                                        <Select
+                                        {/* <Select
                                           items={genero}
                                           label="Gênero"
                                           placeholder="Gênero"
@@ -477,7 +464,7 @@ function SolicitarEmprestimo() {
                                               {animal.label}
                                             </SelectItem>
                                           )}
-                                        </Select>
+                                        </Select> */}
                                       </div>
                                     </div>
                                   </div>
@@ -639,7 +626,6 @@ function SolicitarEmprestimo() {
                                     <div className="bg-yellow-900 rounded-full p-1">
                                       <Textarea
                                         label="Garantias de Pagamento"
-                                        labelPlacement="outside"
                                         placeholder="Descreva as garantias de pagamento do saldo solicitado por si...."
                                         className="max-w-xs"
                                         value={garantias}
@@ -650,9 +636,7 @@ function SolicitarEmprestimo() {
                                     </div>
                                   </div>
                                 </div>
-                              </CardBody>
                               <Divider />
-                              <CardFooter>
                                 <div className="w-[120px]">
                                   <div className="bg-black rounded-full p-1 text-center">
                                     <button
@@ -663,10 +647,10 @@ function SolicitarEmprestimo() {
                                       <div className="flex flex-row p-1">
                                         {processando ? (
                                           <>
-                                            <CircularProgress
+                                            {/* <CircularProgress
                                               color="warning"
                                               aria-label="Loading..."
-                                            />
+                                            /> */}
                                           </>
                                         ) : (
                                           <>Solicitar</>
@@ -680,7 +664,6 @@ function SolicitarEmprestimo() {
                                   processo de avaliação prévia! Será notificado
                                   através do número de telemóvel...
                                 </h2>
-                              </CardFooter>
                             </Card>
                           </div>
                         </div>

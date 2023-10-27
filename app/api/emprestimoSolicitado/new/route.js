@@ -1,5 +1,5 @@
-import { connectToDB } from "../../../../../utils/database";
-import EmprestimosSolicitados from "../../../../../models/solicitarEmprestimo";
+import { connectToDB } from "../../../../utils/database";
+import EmprestimosSolicitados from "../../../../models/solicitarEmprestimo";
 
 export const POST = async (req, res) => {
   const {

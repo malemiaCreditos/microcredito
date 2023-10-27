@@ -1,5 +1,5 @@
-import { connectToDB } from "../../../../../utils/database";
-import EntradaSaida from "../../../../../models/entradaSaida";
+import { connectToDB } from "../../../../utils/database";
+import EntradaSaida from "../../../../models/entradaSaida";
 
 export const POST = async (req, res) => {
   const { dataEmprestimo, nomeCliente, operacao, saldo } = await req.json();

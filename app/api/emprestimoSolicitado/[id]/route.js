@@ -1,5 +1,5 @@
-import EmprestimosSolicitados from "../../../../../models/solicitarEmprestimo";
-import { connectToDB } from "../../../../../utils/database";
+import EmprestimosSolicitados from "../../../../models/solicitarEmprestimo";
+import { connectToDB } from "../../../../utils/database";
 
 export const PATCH = async (request, { params }) => {
   const {
