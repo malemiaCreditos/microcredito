@@ -3,10 +3,6 @@
 import React from "react";
 import { useSession } from "next-auth/react";
 import {
-  Card,
-  CardBody,
-  CardFooter,
-  CircularProgress,
   Divider,
   Input,
   Spacer,
@@ -322,10 +318,10 @@ function Lancamentos() {
                             <div className="flex flex-row p-1">
                               {processando ? (
                                 <>
-                                  <CircularProgress
+                                  {/* <CircularProgress
                                     color="warning"
                                     aria-label="Loading..."
-                                  />
+                                  /> */}
                                 </>
                               ) : (
                                 <>Confirmar</>

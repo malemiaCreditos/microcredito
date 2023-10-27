@@ -6,14 +6,9 @@ import { useState, useEffect } from "react";
 import { animals } from "./data";
 import {
   Card,
-  CardBody,
-  CardFooter,
   Divider,
-  CircularProgress,
   Input,
   Spacer,
-  Select,
-  SelectItem,
 } from "@nextui-org/react";
 import { toast } from "react-toastify";
 import { useSession } from "next-auth/react";
@@ -237,11 +232,10 @@ function EntradaSaida() {
               </div>
               <div className="w-4/5">
                 <Card className="bg-yellow-900">
-                  <CardBody>
                     <div className="flex flex-row">
                       <div className="w-1/2 text-center">
                         <div className="bg-yellow-900 rounded-full p-1">
-                          <Select
+                          {/* <Select
                             items={emprestimoLista}
                             label="Nome do Cliente"
                             placeholder="Nome do Cliente"
@@ -254,7 +248,7 @@ function EntradaSaida() {
                                 {animal.label}
                               </SelectItem>
                             )}
-                          </Select>
+                          </Select> */}
                         </div>
                       </div>
                       <div className="w-1/2">
@@ -283,7 +277,7 @@ function EntradaSaida() {
                       </div>
                       <div className="w-1/2 text-center">
                         <div className="bg-yellow-900 rounded-full p-1">
-                          <Select
+                          {/* <Select
                             items={animals}
                             label="Operação"
                             placeholder="Operação"
@@ -296,13 +290,11 @@ function EntradaSaida() {
                                 {animal.label}
                               </SelectItem>
                             )}
-                          </Select>
+                          </Select> */}
                         </div>
                       </div>
                     </div>
-                  </CardBody>
                   <Divider />
-                  <CardFooter>
                     <div className="w-[120px]">
                       <div className="bg-black rounded-full p-1 text-center">
                         <button
@@ -313,10 +305,10 @@ function EntradaSaida() {
                           <div className="flex flex-row p-1">
                             {processando ? (
                               <>
-                                <CircularProgress
+                                {/* <CircularProgress
                                   color="warning"
                                   aria-label="Loading..."
-                                />
+                                /> */}
                               </>
                             ) : (
                               <>Confirmar</>
@@ -325,7 +317,6 @@ function EntradaSaida() {
                         </button>
                       </div>
                     </div>
-                  </CardFooter>
                 </Card>
               </div>
             </div>
@@ -337,7 +328,6 @@ function EntradaSaida() {
             <div className="flex flex-row gap-4">
               <div className="w-1/2 bg-yellow-900">
                 <Card>
-                  <CardBody>
                     <div className="flex flex-row gap-2">
                       <div>
                         <svg
@@ -365,12 +355,10 @@ function EntradaSaida() {
                         </p>
                       </div>
                     </div>
-                  </CardBody>
                 </Card>
               </div>
               <div className="w-1/2 bg-yellow-900">
                 <Card>
-                  <CardBody>
                     <div className="flex flex-row gap-2">
                       <div>
                         <svg
@@ -398,7 +386,6 @@ function EntradaSaida() {
                         </p>
                       </div>
                     </div>
-                  </CardBody>
                 </Card>
               </div>
               {novaOperacao ? (
