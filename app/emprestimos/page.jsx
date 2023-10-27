@@ -12,12 +12,13 @@ function Emprestimos() {
       const response = await fetch(`/api/emprestimoSolicitado`);
       const data = await response.json();
       setEmprestimoLista(data);
+      console.log(data);
     }; 
     if (session?.user) fetchPosts();
   }, [session?.user]);
   return (
     <>
-      <div className="w-5/6">
+      <div className="glassmorphism  w-full">
         <Table3 emprestimoLista={emprestimoLista} />
       </div>
     </>

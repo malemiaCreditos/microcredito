@@ -252,7 +252,7 @@ function SolicitarEmprestimo() {
   return (
     <>
       {session?.user && (
-        <div>
+        <div className="glassmorphism">
           {status === "Pendente" ? (
             <>
               <h2 className="text-center text-yellow-500 text-2xl">
@@ -271,7 +271,6 @@ function SolicitarEmprestimo() {
                   <div className="w-full">
                     <div className="flex flex-row gap-4 w-[1400px]">
                       <div className="bg-yellow-800">
-                        <Card className="w-[400px]">
                           <div className="bg-yellow-900">
                               <Image
                                 className="rounded-full"
@@ -339,7 +338,6 @@ function SolicitarEmprestimo() {
                                 </p>
                               </Link>
                           </div>
-                        </Card>
                       </div>
                       <div className="flex text-center w-[1100px]">
                         <Table1 emprestimoLista={emprestimoLista} />
@@ -372,11 +370,10 @@ function SolicitarEmprestimo() {
                               Emprestimo
                             </h2>
                             <Spacer y={4} />
-                            <Card className="bg-yellow-900">
                                 <Spacer y={4} />
                                 <div className="flex flex-row">
                                   <div className="w-1/2 text-center">
-                                    <div className="bg-yellow-900 rounded-full p-1">
+                                    <div className="rounded-full p-1">
                                       <Input
                                         className="max-w-ml"
                                         placeholder="Nome Completo"
@@ -389,7 +386,7 @@ function SolicitarEmprestimo() {
                                     </div>
                                   </div>
                                   <div className="w-1/2 text-center">
-                                    <div className="bg-yellow-900 rounded-full p-1">
+                                    <div className="rounded-full p-1">
                                       <Input
                                         className="max-w-ml"
                                         placeholder="Número de BI"
@@ -400,7 +397,7 @@ function SolicitarEmprestimo() {
                                     </div>
                                   </div>
                                   <div className="w-1/2 text-center">
-                                    <div className="bg-yellow-900 rounded-full p-1">
+                                    <div className="rounded-full p-1">
                                       <Input
                                         className="max-w-ml"
                                         placeholder="NUIT"
@@ -413,7 +410,7 @@ function SolicitarEmprestimo() {
                                     </div>
                                   </div>
                                   <div className="w-1/2 text-center">
-                                    <div className="bg-yellow-900 rounded-full p-1">
+                                    <div className="rounded-full p-1">
                                       <Input
                                         className="max-w-ml"
                                         placeholder="Contacto"
@@ -429,7 +426,7 @@ function SolicitarEmprestimo() {
                                 <Spacer y={4} />
                                 <div className="flex flex-row">
                                   <div className="w-1/2 text-center">
-                                    <div className="bg-yellow-900 rounded-full p-1">
+                                    <div className="rounded-full p-1">
                                       <div className="flex flex-row">
                                         <h2 className="text-center text-white w-1/2">
                                           Data de Nascimento:
@@ -447,29 +444,26 @@ function SolicitarEmprestimo() {
                                     </div>
                                   </div>
                                   <div className="w-1/2 text-center">
-                                    <div className="bg-yellow-900 rounded-full p-1">
+                                    <div className="rounded-full p-1">
                                       <div className="flex flex-row">
-                                        {/* <Select
-                                          items={genero}
-                                          label="Gênero"
-                                          placeholder="Gênero"
-                                          className="max-w-xs"
-                                          value={genero2}
+                                      <select 
+                        className="rounded-full p-1 w-full"
+                        value={genero2}
                                           onChange={(e) =>
                                             setGenero2(e.target.value)
-                                          }
-                                        >
-                                          {(animal) => (
-                                            <SelectItem key={animal.value}>
-                                              {animal.label}
-                                            </SelectItem>
-                                          )}
-                                        </Select> */}
+                                          }>
+                          <option value="Operação">Operação</option>
+                          {genero.length > 0 && genero.map((animal) => (
+                              <>
+                              <option value={animal.label}>{animal.label}</option>
+                              </>
+                            ))}
+                        </select>
                                       </div>
                                     </div>
                                   </div>
                                   <div className="w-1/2 text-center">
-                                    <div className="bg-yellow-900 rounded-full p-1">
+                                    <div className="rounded-full p-1">
                                       <div className="flex flex-row">
                                         <Input
                                           className="max-w-ml"
@@ -487,7 +481,7 @@ function SolicitarEmprestimo() {
                                 <Spacer y={4} />
                                 <div className="flex flex-row">
                                   <div className="w-1/2 text-center">
-                                    <div className="bg-yellow-900 rounded-full p-1">
+                                    <div className="rounded-full p-1">
                                       <Input
                                         className="max-w-ml"
                                         placeholder="Nome do Pai"
@@ -500,7 +494,7 @@ function SolicitarEmprestimo() {
                                     </div>
                                   </div>
                                   <div className="w-1/2 text-center">
-                                    <div className="bg-yellow-900 rounded-full p-1">
+                                    <div className="rounded-full p-1">
                                       <Input
                                         className="max-w-ml"
                                         placeholder="Nome da Mão"
@@ -513,7 +507,7 @@ function SolicitarEmprestimo() {
                                     </div>
                                   </div>
                                   <div className="w-1/2 text-center">
-                                    <div className="bg-yellow-900 rounded-full p-1">
+                                    <div className="rounded-full p-1">
                                       <Input
                                         className="max-w-ml"
                                         placeholder="Endereço"
@@ -526,7 +520,7 @@ function SolicitarEmprestimo() {
                                     </div>
                                   </div>
                                   <div className="w-1/2 text-center">
-                                    <div className="bg-yellow-900 rounded-full p-1">
+                                    <div className="rounded-full p-1">
                                       <Input
                                         className="max-w-ml"
                                         placeholder="Número da Casa"
@@ -542,7 +536,7 @@ function SolicitarEmprestimo() {
                                 <Spacer y={4} />
                                 <div className="flex flex-row">
                                   <div className="w-1/2 text-center">
-                                    <div className="bg-yellow-900 rounded-full p-1">
+                                    <div className="rounded-full p-1">
                                       <Input
                                         className="max-w-ml"
                                         placeholder="Bairro"
@@ -555,7 +549,7 @@ function SolicitarEmprestimo() {
                                     </div>
                                   </div>
                                   <div className="w-1/2 text-center">
-                                    <div className="bg-yellow-900 rounded-full p-1">
+                                    <div className="rounded-full p-1">
                                       <Input
                                         className="max-w-ml"
                                         placeholder="Cidade"
@@ -568,7 +562,7 @@ function SolicitarEmprestimo() {
                                     </div>
                                   </div>
                                   <div className="w-1/2 text-center">
-                                    <div className="bg-yellow-900 rounded-full p-1">
+                                    <div className="rounded-full p-1">
                                       <Input
                                         className="max-w-ml"
                                         placeholder="Distrito"
@@ -581,7 +575,7 @@ function SolicitarEmprestimo() {
                                     </div>
                                   </div>
                                   <div className="w-1/2 text-center">
-                                    <div className="bg-yellow-900 rounded-full p-1">
+                                    <div className="rounded-full p-1">
                                       <Input
                                         className="max-w-ml"
                                         placeholder="Provincia"
@@ -597,7 +591,7 @@ function SolicitarEmprestimo() {
                                 <Spacer y={4} />
                                 <div className="flex flex-row">
                                   <div className="w-1/2 text-center">
-                                    <div className="bg-yellow-900 rounded-full p-1">
+                                    <div className="rounded-full p-1">
                                       <Input
                                         className="max-w-ml"
                                         placeholder="Saldo Solicitado"
@@ -610,7 +604,7 @@ function SolicitarEmprestimo() {
                                     </div>
                                   </div>
                                   <div className="w-1/2 text-center">
-                                    <div className="bg-yellow-900 rounded-full p-1">
+                                    <div className="rounded-full p-1">
                                       <Input
                                         className="max-w-ml"
                                         placeholder="Qual é a sua fonte de rendimento mensal?"
@@ -623,7 +617,7 @@ function SolicitarEmprestimo() {
                                     </div>
                                   </div>
                                   <div className="w-1/2 text-center">
-                                    <div className="bg-yellow-900 rounded-full p-1">
+                                    <div className="rounded-full p-1">
                                       <Textarea
                                         label="Garantias de Pagamento"
                                         placeholder="Descreva as garantias de pagamento do saldo solicitado por si...."
@@ -636,8 +630,11 @@ function SolicitarEmprestimo() {
                                     </div>
                                   </div>
                                 </div>
-                              <Divider />
-                                <div className="w-[120px]">
+                                <Spacer y={1} />
+                  <Divider />
+                  <Spacer y={1} />
+                  <div className="flex flex-row gap-4">
+                  <div className="w-[120px]">
                                   <div className="bg-black rounded-full p-1 text-center">
                                     <button
                                       type={"button"}
@@ -653,7 +650,7 @@ function SolicitarEmprestimo() {
                                             /> */}
                                           </>
                                         ) : (
-                                          <>Solicitar</>
+                                          <><div className="text-white">Confirmar</div></>
                                         )}
                                       </div>
                                     </button>
@@ -664,7 +661,8 @@ function SolicitarEmprestimo() {
                                   processo de avaliação prévia! Será notificado
                                   através do número de telemóvel...
                                 </h2>
-                            </Card>
+                  </div>
+                                
                           </div>
                         </div>
                       </div>

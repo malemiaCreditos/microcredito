@@ -197,7 +197,7 @@ function Lancamentos() {
             <div className="w-full flex justify-center content-center">
               <div className="flex flex-row w-full gap-4 justify-center">
                 <div className="w-[120px]">
-                  <div className="bg-yellow-900 rounded-full p-1">
+                  <div className="rounded-full p-1">
                     <button
                       type={"button"}
                       onClick={() => setNovaOperacao(false)}
@@ -232,7 +232,7 @@ function Lancamentos() {
                     
                       <div className="flex flex-row">
                         <div className="w-1/2 text-center">
-                          <div className="bg-yellow-900 rounded-full p-1">
+                          <div className="rounded-full p-1">
                             <Input
                               className="max-w-ml"
                               placeholder="Nome do Cliente"
@@ -243,7 +243,7 @@ function Lancamentos() {
                           </div>
                         </div>
                         <div className="w-1/2">
-                          <div className="bg-yellow-900 rounded-full p-1">
+                          <div className="rounded-full p-1">
                             <Input
                               className="max-w-ml"
                               type="date"
@@ -255,7 +255,7 @@ function Lancamentos() {
                           </div>
                         </div>
                         <div className="w-1/2 text-center">
-                          <div className="bg-yellow-900 rounded-full p-1">
+                          <div className="rounded-full p-1">
                             <Input
                               className="max-w-ml"
                               placeholder="Saldo (Emprestimo)"
@@ -266,10 +266,10 @@ function Lancamentos() {
                           </div>
                         </div>
                       </div>
-                      <Spacer y={4} />
+                      <Spacer y={1} />
                       <div className="flex flex-row">
                         <div className="w-1/2 text-center">
-                          <div className="bg-yellow-900 rounded-full p-1">
+                          <div className="rounded-full p-1">
                             <Input
                               className="max-w-ml"
                               placeholder="Juros (%)"
@@ -282,7 +282,7 @@ function Lancamentos() {
                           </div>
                         </div>
                         <div className="w-1/2 text-center">
-                          <div className="bg-yellow-900 rounded-full p-1">
+                          <div className="rounded-full p-1">
                             <Input
                               className="max-w-ml"
                               placeholder="Multa/Dia (%)"
@@ -295,7 +295,7 @@ function Lancamentos() {
                           </div>
                         </div>
                         <div className="w-1/2 text-center">
-                          <div className="bg-yellow-900 rounded-full p-1">
+                          <div className="rounded-full p-1">
                             <Input
                               className="max-w-ml"
                               placeholder="Parcelas"
@@ -306,8 +306,9 @@ function Lancamentos() {
                           </div>
                         </div>
                       </div>
-                    
+                      <Spacer y={1} />
                     <Divider />
+                    <Spacer y={1} />
                       <div className="w-[120px]">
                         <div className="bg-black rounded-full p-1 text-center">
                           <button
@@ -324,13 +325,13 @@ function Lancamentos() {
                                   /> */}
                                 </>
                               ) : (
-                                <>Confirmar</>
+                                <><h3 className="text-white">Confirmar</h3></>
                               )}
                             </div>
                           </button>
                         </div>
                       </div>
-                  
+                      
                 </div>
               </div>
             </div>
@@ -338,8 +339,7 @@ function Lancamentos() {
         ) : (
           <>
             <div className="flex flex-row gap-4">
-              <div className="w-1/2">
-                
+              <div className="w-1/2">               
                   
                     <div className="flex flex-row gap-2">
                       <div>
@@ -367,8 +367,7 @@ function Lancamentos() {
                           }).format(totalInvestido)}
                         </p>
                       </div>
-                    </div>
-                  
+                    </div>                 
                 
               </div>
               <div className="w-1/2">
@@ -501,8 +500,6 @@ function Lancamentos() {
                 
               </div>
               <div className="w-1/2">
-                
-                  
                     <div className="flex flex-row gap-2">
                       <div>
                         <svg

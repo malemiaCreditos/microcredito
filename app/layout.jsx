@@ -4,8 +4,8 @@ import Nav from "../components/Nav";
 import Provider from "../components/Provider";
 
 export const metadata = {
-  title: "Systems Manager",
-  description: "Sistema de Gestão Empresarial Integrado",
+  title: "Malemia Microcredito",
+  description: "Plataforma de Gestao de Credito",
 };
 
 function RootLayout({ children }) {

@@ -81,7 +81,6 @@ function EntradaSaida() {
   }, [numeroAumne]);
   async function novoLancamento() {
     setProcessando(true);
-
     if (
       dataEmprestimo === "" ||
       nomeCliente === "" ||
@@ -170,12 +169,13 @@ function EntradaSaida() {
   }
   return (
     <>
-      {novaOperacao ? (
+    <div className="glassmorphism ">
+    {novaOperacao ? (
         <>
           <div className="w-full flex justify-center content-center">
             <div className="flex flex-row w-full gap-4 justify-center">
               <div className="w-[120px]">
-                <div className="bg-yellow-900 rounded-full p-1 mb-4">
+                <div className="rounded-full p-1 mb-4">
                   <button
                     type={"button"}
                     onClick={() => setNovaOperacao(false)}
@@ -205,7 +205,7 @@ function EntradaSaida() {
                     </div>
                   </button>
                 </div>
-                <div className="bg-yellow-900 rounded-full p-1 text-center">
+                <div className="rounded-full p-1 text-center">
                   <button
                     type={"button"}
                     onClick={() => actualizar()}
@@ -231,10 +231,20 @@ function EntradaSaida() {
                 </div>
               </div>
               <div className="w-4/5">
-                <Card className="bg-yellow-900">
                     <div className="flex flex-row">
                       <div className="w-1/2 text-center">
-                        <div className="bg-yellow-900 rounded-full p-1">
+                        <div className="rounded-full p-1">
+                        <select 
+                        className="rounded-full p-1 w-full"
+                        value={nomeCliente}
+                            onChange={(e) => setNomeCliente(e.target.value)}>
+                          <option value="Nome do Cliente">Nome do Cliente</option>
+                          {emprestimoLista.length > 0 && emprestimoLista.map((animal) => (
+                              <>
+                              <option value={animal.label}>{animal.label}</option>
+                              </>
+                            ))}
+                        </select>
                           {/* <Select
                             items={emprestimoLista}
                             label="Nome do Cliente"
@@ -252,7 +262,7 @@ function EntradaSaida() {
                         </div>
                       </div>
                       <div className="w-1/2">
-                        <div className="bg-yellow-900 rounded-full p-1">
+                        <div className="rounded-full p-1  w-full">
                           <Input
                             className="max-w-ml"
                             type="date"
@@ -265,7 +275,7 @@ function EntradaSaida() {
                     <Spacer y={4} />
                     <div className="flex flex-row">
                       <div className="w-1/2 text-center">
-                        <div className="bg-yellow-900 rounded-full p-1">
+                        <div className="rounded-full p-1  w-full">
                           <Input
                             className="max-w-ml"
                             placeholder="Saldo"
@@ -276,25 +286,24 @@ function EntradaSaida() {
                         </div>
                       </div>
                       <div className="w-1/2 text-center">
-                        <div className="bg-yellow-900 rounded-full p-1">
-                          {/* <Select
-                            items={animals}
-                            label="Operação"
-                            placeholder="Operação"
-                            className="max-w-xs"
-                            value={operacao}
-                            onChange={(e) => setOperacao(e.target.value)}
-                          >
-                            {(animal) => (
-                              <SelectItem key={animal.value}>
-                                {animal.label}
-                              </SelectItem>
-                            )}
-                          </Select> */}
+                        <div className="rounded-full p-1">
+                        <select 
+                        className="rounded-full p-1 w-full"
+                        value={operacao}
+                            onChange={(e) => setOperacao(e.target.value)}>
+                          <option value="Operação">Operação</option>
+                          {animals.length > 0 && animals.map((animal) => (
+                              <>
+                              <option value={animal.label}>{animal.label}</option>
+                              </>
+                            ))}
+                        </select>
                         </div>
                       </div>
                     </div>
+                    <Spacer y={1} />
                   <Divider />
+                  <Spacer y={1} />
                     <div className="w-[120px]">
                       <div className="bg-black rounded-full p-1 text-center">
                         <button
@@ -311,13 +320,12 @@ function EntradaSaida() {
                                 /> */}
                               </>
                             ) : (
-                              <>Confirmar</>
+                              <><div className="text-white">Confirmar</div></>
                             )}
                           </div>
                         </button>
                       </div>
                     </div>
-                </Card>
               </div>
             </div>
           </div>
@@ -326,8 +334,7 @@ function EntradaSaida() {
         <>
           <div className="w-full">
             <div className="flex flex-row gap-4">
-              <div className="w-1/2 bg-yellow-900">
-                <Card>
+              <div className="w-1/2 ">
                     <div className="flex flex-row gap-2">
                       <div>
                         <svg
@@ -346,8 +353,8 @@ function EntradaSaida() {
                         </svg>
                       </div>
                       <div className="flex flex-col">
-                        <p className="text-lg font-bold">EMPRESTADO</p>
-                        <p className="text-lg text-default-500">
+                        <p className="text-sm font-bold">EMPRESTADO</p>
+                        <p className="text-sm text-default-500">
                           {Intl.NumberFormat("de-DE", {
                             style: "currency",
                             currency: "MZN",
@@ -355,10 +362,8 @@ function EntradaSaida() {
                         </p>
                       </div>
                     </div>
-                </Card>
               </div>
-              <div className="w-1/2 bg-yellow-900">
-                <Card>
+              <div className="w-1/2 ">
                     <div className="flex flex-row gap-2">
                       <div>
                         <svg
@@ -377,8 +382,8 @@ function EntradaSaida() {
                         </svg>
                       </div>
                       <div className="flex flex-col">
-                        <p className="text-lg font-bold">RECEBIDO</p>
-                        <p className="text-lg text-default-500">
+                        <p className="text-sm font-bold">RECEBIDO</p>
+                        <p className="text-sm text-default-500">
                           {Intl.NumberFormat("de-DE", {
                             style: "currency",
                             currency: "MZN",
@@ -386,14 +391,13 @@ function EntradaSaida() {
                         </p>
                       </div>
                     </div>
-                </Card>
               </div>
               {novaOperacao ? (
                 <></>
               ) : (
                 <>
                   <div className="w-1/2">
-                    <div className="flex bg-yellow-900 rounded-full p-1 justify-center">
+                    <div className="flex rounded-full p-1 justify-center">
                       <button
                         type={"button"}
                         onClick={() => setNovaOperacao(true)}
@@ -422,7 +426,7 @@ function EntradaSaida() {
                 </>
               )}
               <div className="w-1/2 text-center">
-                <div className="bg-yellow-900 rounded-full p-2">
+                <div className="rounded-full p-2">
                   <Input
                     className="max-w-ml"
                     placeholder="Nome do Cliente"
@@ -433,12 +437,12 @@ function EntradaSaida() {
                 </div>
               </div>
               <div className="w-1/2">
-                <div className="bg-yellow-900 rounded-full p-1">
+                <div className="rounded-full p-1">
                   <Input className="max-w-ml" type="date" />
                 </div>
               </div>
               <div className="w-1/2">
-                <div className="bg-yellow-900 rounded-full p-1">
+                <div className="rounded-full p-1">
                   <button
                     type={"button"}
                     onClick={() => {}}
@@ -465,7 +469,7 @@ function EntradaSaida() {
                 </div>
               </div>
             </div>
-            <div className="bg-yellow-900 w-[100px] rounded-full p-1 text-center mt-4">
+            <div className="w-[100px] rounded-full p-1 text-center mt-4">
               <button
                 type={"button"}
                 onClick={() => actualizar()}
@@ -493,6 +497,7 @@ function EntradaSaida() {
           </div>
         </>
       )}
+    </div>      
     </>
   );
 }
