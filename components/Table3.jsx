@@ -1,7 +1,7 @@
 import React from "react";
 import "./ts.css";
 import { toast } from "react-toastify";
-function Table3({ emprestimoLista }) {
+async function Table3({emprestimoLista}) {
   async function updateEmprestimo(id) {
     toast(`Processando`, {
       position: "top-right",

@@ -44,7 +44,7 @@ function Lancamentos({data}) {
   useEffect(() => {
     volatelEmpr = [];
     const fetchPosts = async () => {
-      const response = await fetch(`/api/lancamento`, {cache:'no-cache'});
+      const response = await fetch(`/api/lancamento`, {next: { revalidate: 60 },});
   const data = await response.json();
       data.map((f) => {
         investTotal += parseFloat(f.emprestimo);

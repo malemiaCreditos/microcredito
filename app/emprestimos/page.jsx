@@ -9,7 +9,7 @@ function Emprestimos() {
   const { data: session } = useSession();
   useEffect(() => {
     const fetchPosts = async () => {
-      const response = await fetch(`/api/emprestimoSolicitado`, {cache:'no-cache'});
+      const response = await fetch(`/api/emprestimoSolicitado`, {next: { revalidate: 60 },});
       const data = await response.json();
       setEmprestimoLista(data);
       console.log(data);
@@ -19,7 +19,7 @@ function Emprestimos() {
   return (
     <>
       <div className="glassmorphism  w-full">
-        <Table3 emprestimoLista={emprestimoLista} />
+        <Table3 emprestimoLista = {emprestimoLista}/>
       </div>
     </>
   );
