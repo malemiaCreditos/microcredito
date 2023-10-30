@@ -8,11 +8,12 @@ import {
   Spacer,
 } from "@nextui-org/react";
 import { useState, useEffect } from "react";
+// import Table1 from "../../../components/Table1";
 import Table1 from "../../components/Table1";
 import { toast } from "react-toastify";
 import { useRouter, usePathname } from "next/navigation";
 
-function Lancamentos() {
+function Lancamentos({data}) {
   const router = useRouter();
   var volatelEmpr = [];
   var incrMet = 0;
@@ -44,7 +45,7 @@ function Lancamentos() {
     volatelEmpr = [];
     const fetchPosts = async () => {
       const response = await fetch(`/api/lancamento`);
-      const data = await response.json();
+  const data = await response.json();
       data.map((f) => {
         investTotal += parseFloat(f.emprestimo);
         var jr = parseFloat(f.emprestimo) * parseFloat(f.jurosPercentual);
@@ -573,5 +574,4 @@ function Lancamentos() {
     </>
   );
 }
-
 export default Lancamentos;
