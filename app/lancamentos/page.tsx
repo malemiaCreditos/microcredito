@@ -67,7 +67,7 @@ function Lancamentos() {
         var pQit = 0;
         var patrasoFF = 0;
         if (f.pQuitadas) {
-          pQit += parseInt(f.pQuitadas);
+          pQit += parseInt(f.pQuitadas)-1;
         }
         var pagaParc = Intl.NumberFormat("de-DE", {
           style: "currency",
