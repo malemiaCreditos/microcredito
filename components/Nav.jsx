@@ -6,11 +6,12 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import Provider from "./Provider";
-
+const emailsGestores = ["coutinhocoutinholucas@gmail.com", "felizardomalemia@gmail.com", "ramosdollar33@gmail.com"];
 function Nav() {
   const { data: session } = useSession();
   const [providers, setProviders] = useState(null);
   const [toggleDropdown, setToggleDropdown] = useState(false);
+  const [gestorEmail, setGestorEmail] = useState(false);
 
   useEffect(() => {
     const setUpProviders = async () => {
@@ -19,6 +20,11 @@ function Nav() {
     };
     setUpProviders();
   }, []);
+  useEffect(() => {
+    emailsGestores.map((em) => {
+      if (em === session?.user.email) setGestorEmail(true)
+    })
+  }, [session?.user.email]);
   return (
     <div className="flex-between w-full mb-16 pt-3">
       <Link className="flex gap-2 flex-center" href={"/"}>
@@ -34,7 +40,7 @@ function Nav() {
       <div className="sm:flex hidden">
         {session?.user ? (
           <div className="flex gap-3 md:gap-5">
-            {session?.user.email === "coutinhocoutinholucas@gmail.com" ? (
+            {gestorEmail ? (
                 <>
                     <Link color="foreground" href="/emprestimos">
                       Empréstimos

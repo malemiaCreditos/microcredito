@@ -15,6 +15,7 @@ import React from "react";
 import { genero } from "../entradaSaida/data";
 import { toast } from "react-toastify";
 import Table1 from "../../components/Table1";
+// import { CircularProgress } from "@nextui-org/react";
 
 function SolicitarEmprestimo() {
   var volatelEmpr = [];
@@ -270,8 +271,8 @@ function SolicitarEmprestimo() {
                 <>
                   <div className="w-full">
                     <div className="flex flex-row gap-4 w-[1400px]">
-                      <div className="bg-yellow-800">
-                          <div className="bg-yellow-900">
+                      <div className="bg-yellow-700">
+                          <div className="bg-yellow-800">
                               <Image
                                 className="rounded-full"
                                 alt="Profilo Pic"
@@ -279,7 +280,7 @@ function SolicitarEmprestimo() {
                                 width={40}
                                 height={40}
                               />
-                              <div className="flex flex-col">
+                              <div className="flex flex-col ml-2">
                                 <p className="text-lg">{nomeCompleto}</p>
                                 <p className="text-small text-default-500">
                                   {session?.user.email}
@@ -287,7 +288,8 @@ function SolicitarEmprestimo() {
                               </div>
                           </div>
                           <Divider />
-                            <p>
+                          <div className="ml-2">
+                          <p>
                               {" "}
                               <small className="font-bold text-lg">
                                 Status:
@@ -326,11 +328,13 @@ function SolicitarEmprestimo() {
                                 </button>
                               </div>
                             </p>
+                          </div>
+                            
                           <Divider />
-                          <div className="bg-yellow-900">
+                          <div className="bg-yellow-800">
                               <Link href="#">
-                                <p className="font-bold">
-                                  Emprestimo Solicitado:{" "}
+                                <p className="font-bold text-black ml-2">
+                                  Emprestimo:{" "}
                                   {Intl.NumberFormat("de-DE", {
                                     style: "currency",
                                     currency: "MZN",
@@ -339,7 +343,7 @@ function SolicitarEmprestimo() {
                               </Link>
                           </div>
                       </div>
-                      <div className="flex text-center w-[1100px]">
+                      <div className="flex text-center w-[800px]">
                         <Table1 emprestimoLista={emprestimoLista} />
                       </div>
                     </div>
@@ -369,8 +373,7 @@ function SolicitarEmprestimo() {
                               Fomulário de Pré-Registro Para Solicitação de
                               Emprestimo
                             </h2>
-                            <Spacer y={4} />
-                                <Spacer y={4} />
+                                <Spacer y={1} />
                                 <div className="flex flex-row">
                                   <div className="w-1/2 text-center">
                                     <div className="rounded-full p-1">
@@ -452,7 +455,7 @@ function SolicitarEmprestimo() {
                                           onChange={(e) =>
                                             setGenero2(e.target.value)
                                           }>
-                          <option value="Operação">Operação</option>
+                          <option value="Genero">Genero</option>
                           {genero.length > 0 && genero.map((animal) => (
                               <>
                               <option value={animal.label}>{animal.label}</option>
@@ -497,7 +500,7 @@ function SolicitarEmprestimo() {
                                     <div className="rounded-full p-1">
                                       <Input
                                         className="max-w-ml"
-                                        placeholder="Nome da Mão"
+                                        placeholder="Nome da Mãe"
                                         type="text"
                                         value={nomeMae}
                                         onChange={(e) =>
