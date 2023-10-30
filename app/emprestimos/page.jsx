@@ -9,7 +9,7 @@ function Emprestimos() {
   const { data: session } = useSession();
   useEffect(() => {
     const fetchPosts = async () => {
-      const response = await fetch(`/api/emprestimoSolicitado`);
+      const response = await fetch(`/api/emprestimoSolicitado`, {cache:'no-cache'});
       const data = await response.json();
       setEmprestimoLista(data);
       console.log(data);
