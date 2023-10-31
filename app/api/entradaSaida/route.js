@@ -2,6 +2,7 @@ import EntradaSaida from "../../../models/entradaSaida";
 import { connectToDB } from "../../../utils/database";
 
 export const GET = async (req, res) => {
+  req.json();
   try {
     await connectToDB();
 

@@ -10,7 +10,7 @@ export const POST = async (req, res) => {
     nomeMae,
     endereco,
     numeroCasa,
-    bairro,
+    bairro, 
     cidade,
     distrito,
     provincia,

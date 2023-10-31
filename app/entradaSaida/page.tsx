@@ -52,7 +52,7 @@ function EntradaSaida() {
   useEffect(() => {
     volatelEntradaSaida = [];
     const fetchPosts = async () => {
-      const response = await fetch(`/api/entradaSaida`, {next: { revalidate: 60 },});
+      const response = await fetch(`/api/entradaSaida`);
       const data = await response.json();
 
       data.map((f) => {

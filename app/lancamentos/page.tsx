@@ -13,7 +13,7 @@ import Table1 from "../../components/Table1";
 import { toast } from "react-toastify";
 import { useRouter, usePathname } from "next/navigation";
 
-function Lancamentos({data}) {
+function Lancamentos() {
   const router = useRouter();
   var volatelEmpr = [];
   var incrMet = 0;
@@ -44,7 +44,7 @@ function Lancamentos({data}) {
   useEffect(() => {
     volatelEmpr = [];
     const fetchPosts = async () => {
-      const response = await fetch(`/api/lancamento`, {next: { revalidate: 60 },});
+      const response = await fetch(`/api/lancamento`);
   const data = await response.json();
       data.map((f) => {
         investTotal += parseFloat(f.emprestimo);

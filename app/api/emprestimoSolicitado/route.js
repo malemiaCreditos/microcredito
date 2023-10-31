@@ -2,6 +2,7 @@ import { connectToDB } from "../../../utils/database";
 import EmprestimosSolicitados from "../../../models/solicitarEmprestimo";
 
 export const GET = async (req, res) => {
+  req.json();
   try {
     await connectToDB();
 

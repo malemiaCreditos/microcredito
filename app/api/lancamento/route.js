@@ -2,6 +2,7 @@ import Lancamentos from "../../../models/lancamentos";
 import { connectToDB } from "../../../utils/database";
 
 export const GET = async (req, res) => {
+  req.json();
   try {
     await connectToDB();
 
