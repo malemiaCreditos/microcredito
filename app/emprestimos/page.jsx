@@ -14,6 +14,73 @@ function Emprestimos() {
     }; 
     fetchPosts();
   }, );
+  async function updateEmprestimo(id) {
+    toast(`Processando`, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+    const response = await fetch(`/api/emprestimoSolicitado`);
+    const data = await response.json();
+    data.map(async (tt) => {
+      if (tt._id === id) {
+        try {
+          const response = await fetch(`api/emprestimoSolicitado/${id}`, {
+            method: "PATCH",
+            body: JSON.stringify({
+              nomeCompleto: tt.nomeCompleto,
+              bI: tt.bI,
+              contacto: tt.contacto,
+              saldo: tt.saldo,
+              nomeMae: tt.nomeMae,
+              endereco: tt.endereco,
+              numeroCasa: tt.numeroCasa,
+              bairro: tt.bairro,
+              cidade: tt.cidade,
+              distrito: tt.distrito,
+              provincia: tt.provincia,
+              fonteRendimento: tt.fonteRendimento,
+              garantias: tt.garantias,
+              genero2: tt.genero2,
+              nUIT: tt.nUIT,
+              dataNascimento: tt.dataNascimento,
+              nomePai: tt.nomePai,
+              senha: tt.senha,
+              status: "Aprovado",
+              userId: tt.userId,
+            }),
+          });
+        } catch (error) {
+          toast(`Erro: ${error}`, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        } finally {
+          toast(`Emprestimo da(o) ${tt.nomeCompleto} foi aprovado`, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        }
+      }
+    });
+  }
   return (
     <>
       <div className="glassmorphism  w-full">
