@@ -88,7 +88,7 @@ function Home() {
             Apoio Personalizado:{" "}
           </h2>
           <h3 className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Na Malemia Multicrédito, não somos apenas um banco; somos um
+            Na Malemia Microcrédito, não somos apenas um banco; somos um
             parceiro. Oferecemos orientação financeira, treinamento em
             empreendedorismo e suporte contínuo para ajudar você a prosperar.
           </h3>
