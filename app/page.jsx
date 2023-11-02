@@ -29,7 +29,7 @@ function Home() {
         </h3>
         <br />
         <h5 className={`mb-3 text-2xl font-semibold max-w-5xl text-center`}>
-          Você tem grandes sonhos, nós temos a solução! Na Malemia Multicrédito,
+          Você tem grandes sonhos, nós temos a solução! Na Malemia Microcrédito,
           estamos comprometidos em transformar sonhos em realidade, oferecendo
           acesso rápido e acessível ao crédito para você e sua comunidade.
         </h5>
