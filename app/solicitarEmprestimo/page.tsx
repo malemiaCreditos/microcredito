@@ -51,7 +51,7 @@ function SolicitarEmprestimo() {
   const [status, setStatus] = useState("");
   useEffect(() => {
     const fetchPosts = async () => {
-      const response = await fetch(`/api/emprestimoSolicitado`,{next: { revalidate: 60 },});
+      const response = await fetch(`/api/emprestimoSolicitado`);
       const data = await response.json();
       data.map((f) => {
         if (f.userId === session?.user.email) {
@@ -65,7 +65,7 @@ function SolicitarEmprestimo() {
         }
       });
     };
-    if (session?.user) fetchPosts();
+    fetchPosts();
   }, [session?.user]);
   useEffect(() => {
     volatelEmpr = [];
