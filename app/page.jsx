@@ -20,7 +20,7 @@ function Home() {
         <h3
           className={`mb-3 text-4xl font-semibold text-yellow-500 text-center`}
         >
-          Bem-vindo à Malemia Multicrédito
+          Bem-vindo à Malemia Microcrédito
         </h3>
         <h3
           className={`mb-3 text-4xl font-semibold text-yellow-200 text-center`}
