@@ -3,6 +3,7 @@ import React from "react";
 import Table3 from "../../components/Table3";
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
+import { toast } from "react-toastify";
 
 function Emprestimos() {
   const [emprestimoLista, setEmprestimoLista] = useState([]);
