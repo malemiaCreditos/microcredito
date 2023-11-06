@@ -24,3 +24,16 @@ export const genero = [
     description: "",
   },
 ];
+
+export const estadoCivild = [
+  {
+    label: "Solteiro(a)",
+    value: "Solteiro(a)",
+    description: "",
+  },
+  {
+    label: "Casado(a)",
+    value: "Casado(a)",
+    description: "",
+  },
+];

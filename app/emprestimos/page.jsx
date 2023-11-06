@@ -1,12 +1,36 @@
 "use client";
 import React from "react";
-import Table3 from "../../components/Table3";
 import { useState, useEffect } from "react";
-import { useSession } from "next-auth/react";
 import { toast } from "react-toastify";
+import PDFContrato from "../../components/PDFContrato";
 
 function Emprestimos() {
   const [emprestimoLista, setEmprestimoLista] = useState([]);
+  const [nomeCompleto, setNomeCompleto] = useState("");
+  const [nomeCompletoA, setNomeCompletoA] = useState("");
+  const [bI, setBI] = useState("");
+  const [bIA, setBIA] = useState("");
+  const [contacto, setContacto] = useState("");
+  const [contactoA, setContactoA] = useState("");
+  const [saldo, setSaldo] = useState("");
+  const [estadoCivil, setEstadoCivil] = useState("");
+  const [estadoCivilA, setEstadoCivilA] = useState("");
+  const [numeroCasa, setNumeroCasa] = useState("");
+  const [numeroCasaA, setNumeroCasaA] = useState("");
+  const [quarteirao, setQuarteirao] = useState("");
+  const [quarteiraoA, setQuarteiraoA] = useState("");
+  const [bairro, setBairro] = useState("");
+  const [cidade, setCidade] = useState("");
+  const [distrito, setDistrito] = useState("");
+  const [bairroA, setBairroA] = useState("");
+  const [cidadeA, setCidadeA] = useState("");
+  const [distritoA, setDistritoA] = useState("");
+  const [fonteRendimento, setFonteRendimento] = useState("");
+  const [nUIT, setNUIT] = useState("");
+  const [nUITA, setNUITA] = useState("");
+  const [garantias, setGarantias] = useState("");
+  const [status, setStatus] = useState("");
+  const [gatilho, setGatilho] = useState("");
   useEffect(() => {
     const fetchPosts = async () => {
       const response = await fetch(`/api/emprestimoSolicitado`);
@@ -14,7 +38,33 @@ function Emprestimos() {
       setEmprestimoLista(data);
     }; 
     fetchPosts();
-  }, );
+  },[]);
+  function gatilhoTTT() {
+    PDFContrato({
+      nomeCompleto, 
+      bI,
+      bIA, 
+      cidade,
+      cidadeA,
+      distrito,
+      distritoA, 
+      bairro,
+      bairroA,
+      quarteirao,
+      quarteiraoA,
+      numeroCasa,
+      numeroCasaA,
+      fonteRendimento,
+      contacto,
+      nUIT,
+      nUITA,
+      saldo,
+      nomeCompletoA,
+      estadoCivil,
+      estadoCivilA,
+      contactoA
+      });
+  }
   async function updateEmprestimo(id) {
     toast(`Processando`, {
       position: "top-right",
@@ -82,6 +132,40 @@ function Emprestimos() {
       }
     });
   }
+  async function gerarContrato(id) {
+    const response = await fetch(`/api/emprestimoSolicitado`);
+      const data = await response.json();
+      data.map((f) => {
+        if (f._id === id) {
+          setStatus(f.status);
+          setNomeCompleto(f.nomeCompleto);
+          setNomeCompletoA(f.nomeCompletoA);
+          setSaldo(f.saldo);
+          setBI(f.bI);
+          setBIA(f.bIA);
+          setCidade(f.cidade);
+          setCidadeA(f.cidadeA);
+          setDistrito(f.distrito);
+          setDistritoA(f.distritoA);
+          setStatus(f.status);
+          setBairro(f.bairro);
+          setBairroA(f.bairroA);
+          setQuarteirao(f.quarteirao);
+          setQuarteiraoA(f.quarteiraoA);
+          setEstadoCivil(f.estadoCivil);
+          setEstadoCivilA(f.estadoCivilA);
+          setNumeroCasa(f.numeroCasa);
+          setNumeroCasaA(f.numeroCasaA);
+          setNUIT(f.nUIT);
+          setNUITA(f.nUITA);
+          setContacto(f.contacto);
+          setContactoA(f.contactoA);
+          setFonteRendimento(f.fonteRendimento);
+          setGarantias(f.garantias);
+          gatilhoTTT();
+        }
+      });
+  }
   return (
     <>
       <div className="glassmorphism  w-full">
@@ -100,8 +184,7 @@ function Emprestimos() {
             <th>Cidade</th>
             <th>Distrito</th>
             <th>Provincia</th>
-            <th>Nome do Pai</th>
-            <th>Nome da Mãe</th>
+            <th>Quarteirão</th>
             <th>Emp. Solicitado</th>
             <th>Font. Rendimento</th>
             <th>Gar. Pagamento</th>
@@ -125,28 +208,38 @@ function Emprestimos() {
                   <td>{ddf.cidade}</td>
                   <td>{ddf.distrito}</td>
                   <td>{ddf.provincia}</td>
-                  <td>{ddf.nomePai}</td>
-                  <td>{ddf.nomeMae}</td>
+                  <td>{ddf.quarteirao}</td>
                   <td>{ddf.saldo}</td>
                   <td>{ddf.fonteRendimento}</td>
                   <td>{ddf.garantias}</td>
                   <td>{ddf.status}</td>
                   <td>
-                    <button
-                      type={"button"}
-                      onClick={() => updateEmprestimo(ddf._id)}
-                      className="outline_btn"
-                    >
-                      <div className="flex flex-row p-1">
-                        {ddf.status === "Pendente" ? (
+                  {ddf.status === "Pendente" ? (
                           <>
-                            <>Aprovar</>
+                            <button
+                              type={"button"}
+                              onClick={() => updateEmprestimo(ddf._id)}
+                              className="outline_btn"
+                            >
+                              <div className="flex flex-row p-1">
+                              Aprovar
+                              </div>
+                            </button>
                           </>
                         ) : (
-                          <>...</>
+                          <>
+                            <button
+                              type={"button"}
+                              onClick={() => gerarContrato(ddf._id)}
+                              className="outline_btn"
+                            >
+                              <div className="flex flex-row p-1">
+                                Contrato
+                              </div>
+                            </button>
+                          </>
                         )}
-                      </div>
-                    </button>
+                    
                   </td>
                 </tr>
               </>

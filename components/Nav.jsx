@@ -42,6 +42,9 @@ function Nav() {
           <div className="flex gap-3 md:gap-5">
             {gestorEmail ? (
                 <>
+                    <Link color="foreground" href="/addCliente">
+                      Add Cliente
+                    </Link>
                     <Link color="foreground" href="/emprestimos">
                       Empréstimos
                     </Link>
