@@ -35,6 +35,7 @@ function Lancamentos() {
   const [parcelas, setParcelas] = useState("");
   const [emprestimoLista, setEmprestimoLista] = useState([]);
   const [emprestimoLista2, setEmprestimoLista2] = useState([]);
+  const [entradaSaidaLista, setEntradaSaidaLista] = useState([]);
   const [numeroAumne, setNumeroAumne] = useState(0);
   const [totalInvestido, setTotalInvestido] = useState(0);
   const [totalJurosFuturo, setTotalJurosFuturo] = useState(0);
@@ -42,7 +43,34 @@ function Lancamentos() {
   const [totalRecJuros, setTotalRecJuros] = useState(0);
   const [totalDividaTT, setTotalDividaTT] = useState(0);
   const [totalDividaAtrasadoF, setTotalDividaAtrasadoF] = useState(0);
+  var volatelEntradaSaida = [];
 // Status
+useEffect(() => {
+  volatelEntradaSaida = [];
+  const fetchPosts = async () => {
+    const response = await fetch(`/api/entradaSaida`,{
+      cache:"no-cache"
+    });
+    const data = await response.json();
+
+    data.map((f) => {
+      var fEmprestimo = Intl.NumberFormat("de-DE", {
+        style: "currency",
+        currency: "MZN",
+      }).format(f.saldo);
+      volatelEntradaSaida.push({
+        _id: f._id,
+        dataEmprestimo: f.dataEmprestimo,
+        nomeCliente: f.nomeCliente,
+        operacao: f.operacao,
+        saldo: fEmprestimo,
+        saldo1: f.saldo,
+      });
+    });
+    setEntradaSaidaLista(volatelEntradaSaida);
+  };
+  if (session?.user) fetchPosts();
+}, [numeroAumne]);
   useEffect(() => {
     volatelEmpr = [];
     volatelEmpr2 = [];
@@ -692,7 +720,7 @@ function Lancamentos() {
                           </select>
                         </div>
                       </div>
-            <Table1 emprestimoLista={emprestimoLista} />
+            <Table1 emprestimoLista={emprestimoLista} entradaSaidaLista={entradaSaidaLista}/>
           </>
         )}
       </div>
