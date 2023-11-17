@@ -65,7 +65,9 @@ function SolicitarEmprestimo() {
   const [status, setStatus] = useState("");
   useEffect(() => {
     const fetchPosts = async () => {
-      const response = await fetch(`/api/emprestimoSolicitado`);
+      const response = await fetch(`/api/emprestimoSolicitado`,{
+        cache:"no-cache"
+      });
       const data = await response.json();
       data.map((f) => {
         if (f.userId === session?.user.email) {
@@ -102,7 +104,9 @@ function SolicitarEmprestimo() {
   useEffect(() => {
     volatelEmpr = [];
     const fetchPosts = async () => {
-      const response = await fetch(`/api/lancamento`);
+      const response = await fetch(`/api/lancamento`,{
+        cache:"no-cache"
+      });
       const data = await response.json();
       data.map((f) => {
         investTotal += parseFloat(f.emprestimo);

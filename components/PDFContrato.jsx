@@ -75,8 +75,8 @@ async function PDFContrato({
         text: [
           {text: 'MUTUANTE: Malemia Microcrédito E.I.', fontSize: 12, bold: true},
         ' neste acto representado polo gestor Administrativo ',
-        {text: 'Ramos António Macia, ', fontSize: 12, bold: true},
-        'de nacionalidade moçambicana, solteiro, com o Bilhete de Identidade número 090200409079P, residente na Cidade de Maputo, distrito urbano de KaMavota, Bairro da Polana Caniço B, Quarteirão número 39, Casa número 289.'
+        {text: 'Felizardo Lourenço Malemia, ', fontSize: 12, bold: true},
+        'de nacionalidade moçambicana, solteiro, com o Bilhete de Identidade número 100105196687B, residente na Cidade de Maputo, distrito urbano de KaMubucuana, Bairro do Jardim, Quarteirão número 03, Casa número 34'
       ],
         style: 'bodyDoc',
         alignment: 'justify'

@@ -59,3 +59,12 @@ export const PATCH = async (request, { params }) => {
     });
   }
 };
+export const DELETE = async (request, { params }) => {
+  try {
+      await connectToDB();
+      await EmprestimosSolicitados.findByIdAndRemove(params.id)
+      return new Response("Sucess", { status: 200 })
+  } catch (error) {
+      return new Response("Failed to fetch prompts created by user", { status: 500 })
+  }
+} 

@@ -6,7 +6,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import Provider from "./Provider";
-const emailsGestores = ["coutinhocoutinholucas@gmail.com", "felizardomalemia@gmail.com", "ramosdollar33@gmail.com"];
+const emailsGestores = ["coutinhocoutinholucas@gmail.com", "felizardomalemia@gmail.com"];
 function Nav() {
   const { data: session } = useSession();
   const [providers, setProviders] = useState(null);

@@ -16,6 +16,7 @@ import { useRouter, usePathname } from "next/navigation";
 function Lancamentos() {
   const router = useRouter();
   var volatelEmpr = [];
+  var volatelEmpr2 = [];
   var incrMet = 0;
   var investTotal = 0;
   var jurosFuturo = 0;
@@ -33,6 +34,7 @@ function Lancamentos() {
   const [multaPercentualDia, setMultaPercentualDia] = useState("");
   const [parcelas, setParcelas] = useState("");
   const [emprestimoLista, setEmprestimoLista] = useState([]);
+  const [emprestimoLista2, setEmprestimoLista2] = useState([]);
   const [numeroAumne, setNumeroAumne] = useState(0);
   const [totalInvestido, setTotalInvestido] = useState(0);
   const [totalJurosFuturo, setTotalJurosFuturo] = useState(0);
@@ -43,6 +45,113 @@ function Lancamentos() {
 // Status
   useEffect(() => {
     volatelEmpr = [];
+    volatelEmpr2 = [];
+    const fetchPosts = async () => {
+      const response = await fetch(`/api/lancamento`);
+      const data = await response.json();
+      data.map((f) => {
+        investTotal += parseFloat(f.emprestimo);
+        var jr = parseFloat(f.emprestimo) * parseFloat(f.jurosPercentual);
+        var jrT = parseFloat(f.emprestimo) + jr;
+        jurosFuturo += jr;
+        var fEmprestimo = Intl.NumberFormat("de-DE", {
+          style: "currency",
+          currency: "MZN",
+        }).format(f.emprestimo);
+
+        var fJuros = Intl.NumberFormat("de-DE", {
+          style: "currency",
+          currency: "MZN",
+        }).format(jr);
+
+        var fJurosTotal = Intl.NumberFormat("de-DE", {
+          style: "currency",
+          currency: "MZN",
+        }).format(jrT);
+        var pQit = 0;
+        var patrasoFF = 0;
+        if (f.pQuitadas) {
+          pQit += parseInt(f.pQuitadas)-1;
+        }
+        var pagaParc = Intl.NumberFormat("de-DE", {
+          style: "currency",
+          currency: "MZN",
+        }).format(jrT / parseInt(f.parcelas));
+        totalDivida += jrT - (jrT / parseInt(f.parcelas)) * pQit;
+        if (f.atrasado) {
+          patrasoFF += parseInt(f.atrasado);
+        }
+        var valAtrasado =
+          parseFloat(f.emprestimo) *
+          parseFloat(f.multaPercentualDia) *
+          patrasoFF;
+        totalDividaAtrasado += valAtrasado;
+        var dividaActual2 = Intl.NumberFormat("de-DE", {
+          style: "currency",
+          currency: "MZN",
+        }).format(jrT - (jrT / parseInt(f.parcelas)) * pQit + valAtrasado);
+        var atrasoMetic = Intl.NumberFormat("de-DE", {
+          style: "currency",
+          currency: "MZN",
+        }).format(valAtrasado);
+        recPrincipalTotal +=
+          (jrT / parseInt(f.parcelas) -
+            (jrT / parseInt(f.parcelas)) * parseFloat(f.jurosPercentual)) *
+          pQit;
+        var recAmortizacao = Intl.NumberFormat("de-DE", {
+          style: "currency",
+          currency: "MZN",
+        }).format(
+          (jrT / parseInt(f.parcelas) -
+            (jrT / parseInt(f.parcelas)) * parseFloat(f.jurosPercentual)) *
+            pQit
+        );
+        recJurosTotal +=
+          (jrT / parseInt(f.parcelas)) * parseFloat(f.jurosPercentual) * pQit;
+        var recJuros = Intl.NumberFormat("de-DE", {
+          style: "currency",
+          currency: "MZN",
+        }).format(
+          (jrT / parseInt(f.parcelas)) * parseFloat(f.jurosPercentual) * pQit
+        );
+        volatelEmpr2.push({
+          _id: f._id,
+          label: f.nomeCliente,
+          value: f.nomeCliente,
+        });
+        volatelEmpr.push({
+          _id: f._id,
+          dataEmprestimo: f.dataEmprestimo,
+          nomeCliente: f.nomeCliente,
+          emprestimo: fEmprestimo,
+          jurosPercentual: f.jurosPercentual,
+          jurosMetical: fJuros,
+          dividaTotal: fJurosTotal,
+          multaPercentualDia: f.multaPercentualDia,
+          parcelas: f.parcelas,
+          pQuitadas: pQit,
+          pagamentoPParcela: pagaParc,
+          rAmortizacao: recAmortizacao,
+          rJuros: recJuros,
+          tAtrasos: patrasoFF,
+          atrasado: atrasoMetic,
+          dividaActual: dividaActual2,
+        });
+      });
+      setEmprestimoLista2(volatelEmpr2);
+      setEmprestimoLista(volatelEmpr);
+      setTotalInvestido(investTotal);
+      setTotalJurosFuturo(jurosFuturo);
+      setTotalRecPrincipal(recPrincipalTotal);
+      setTotalRecJuros(recJurosTotal);
+      setTotalDividaTT(totalDivida);
+      setTotalDividaAtrasadoF(totalDividaAtrasado);
+    };
+    if (session?.user) fetchPosts();
+  }, [numeroAumne]);
+  useEffect(() => {
+    volatelEmpr = [];
+    volatelEmpr2 = [];
     const fetchPosts = async () => {
       const response = await fetch(`/api/lancamento`);
   const data = await response.json();
@@ -111,25 +220,26 @@ function Lancamentos() {
         }).format(
           (jrT / parseInt(f.parcelas)) * parseFloat(f.jurosPercentual) * pQit
         );
-
-        volatelEmpr.push({
-          _id: f._id,
-          dataEmprestimo: f.dataEmprestimo,
-          nomeCliente: f.nomeCliente,
-          emprestimo: fEmprestimo,
-          jurosPercentual: f.jurosPercentual,
-          jurosMetical: fJuros,
-          dividaTotal: fJurosTotal,
-          multaPercentualDia: f.multaPercentualDia,
-          parcelas: f.parcelas,
-          pQuitadas: pQit,
-          pagamentoPParcela: pagaParc,
-          rAmortizacao: recAmortizacao,
-          rJuros: recJuros,
-          tAtrasos: patrasoFF,
-          atrasado: atrasoMetic,
-          dividaActual: dividaActual2,
-        });
+        if (nomeCliente === f.nomeCliente) {
+          volatelEmpr.push({
+            _id: f._id,
+            dataEmprestimo: f.dataEmprestimo,
+            nomeCliente: f.nomeCliente,
+            emprestimo: fEmprestimo,
+            jurosPercentual: f.jurosPercentual,
+            jurosMetical: fJuros,
+            dividaTotal: fJurosTotal,
+            multaPercentualDia: f.multaPercentualDia,
+            parcelas: f.parcelas,
+            pQuitadas: pQit,
+            pagamentoPParcela: pagaParc,
+            rAmortizacao: recAmortizacao,
+            rJuros: recJuros,
+            tAtrasos: patrasoFF,
+            atrasado: atrasoMetic,
+            dividaActual: dividaActual2,
+          });
+        }
       });
       setEmprestimoLista(volatelEmpr);
       setTotalInvestido(investTotal);
@@ -140,7 +250,7 @@ function Lancamentos() {
       setTotalDividaAtrasadoF(totalDividaAtrasado);
     };
     if (session?.user) fetchPosts();
-  }, [numeroAumne]);
+  }, [nomeCliente]);
   function actualizar() {
     incrMet += 1;
     setNumeroAumne(incrMet);
@@ -192,7 +302,7 @@ function Lancamentos() {
   }
   return (
     <>
-      <div className="glassmorphism  flex-grow w-full">
+      <div className="glassmorphism  flex-grow w-full divWithScroll">
         {novaOperacao ? (
           <>
             <div className="w-full flex justify-center content-center">
@@ -567,6 +677,21 @@ function Lancamentos() {
                 </div>
               </div>
             </div>
+            <div className="w-1/2 text-center">
+                        <div className="rounded-full p-1">
+                          <select 
+                          className="rounded-full p-1 w-full"
+                          value={nomeCliente}
+                              onChange={(e) => setNomeCliente(e.target.value)}>
+                            <option value="Nome do Cliente">Nome do Cliente</option>
+                            {emprestimoLista2.length > 0 && emprestimoLista2.map((animal) => (
+                                <>
+                                <option value={animal.label}>{animal.label}</option>
+                                </>
+                              ))}
+                          </select>
+                        </div>
+                      </div>
             <Table1 emprestimoLista={emprestimoLista} />
           </>
         )}

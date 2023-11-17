@@ -36,7 +36,9 @@ function EntradaSaida() {
   useEffect(() => {
     volatelEmpr = [];
     const fetchPosts = async () => {
-      const response = await fetch(`/api/lancamento`);
+      const response = await fetch(`/api/lancamento`,{
+        cache:"no-cache"
+      });
       const data = await response.json();
       data.map((f) => {
         volatelEmpr.push({
@@ -52,7 +54,9 @@ function EntradaSaida() {
   useEffect(() => {
     volatelEntradaSaida = [];
     const fetchPosts = async () => {
-      const response = await fetch(`/api/entradaSaida`);
+      const response = await fetch(`/api/entradaSaida`,{
+        cache:"no-cache"
+      });
       const data = await response.json();
 
       data.map((f) => {
@@ -79,6 +83,40 @@ function EntradaSaida() {
     };
     if (session?.user) fetchPosts();
   }, [numeroAumne]);
+  useEffect(() => {
+    volatelEntradaSaida = [];
+    const fetchPosts = async () => {
+      const response = await fetch(`/api/entradaSaida`,{
+        cache:"no-cache"
+      });
+      const data = await response.json();
+
+      data.map((f) => {
+        if (nomeCliente === f.nomeCliente) {
+          var fEmprestimo = Intl.NumberFormat("de-DE", {
+            style: "currency",
+            currency: "MZN",
+          }).format(f.saldo);
+          if (f.operacao === "Entrada") {
+            incrRecebido += parseFloat(f.saldo);
+          } else {
+            incrEmprestado += parseFloat(f.saldo);
+          }
+          volatelEntradaSaida.push({
+            _id: f._id,
+            dataEmprestimo: f.dataEmprestimo,
+            nomeCliente: f.nomeCliente,
+            operacao: f.operacao,
+            saldo: fEmprestimo,
+          });
+        }        
+      });
+      setEntradaSaidaLista(volatelEntradaSaida);
+      setTotalRecebido(incrRecebido);
+      setTotalEmprestado(incrEmprestado);
+    };
+    if (session?.user) fetchPosts();
+  }, [nomeCliente]);
   async function novoLancamento() {
     setProcessando(true);
     if (
@@ -169,7 +207,7 @@ function EntradaSaida() {
   }
   return (
     <>
-    <div className="glassmorphism ">
+    <div className="glassmorphism divWithScroll">
     {novaOperacao ? (
         <>
           <div className="w-full flex justify-center content-center">
@@ -234,31 +272,17 @@ function EntradaSaida() {
                     <div className="flex flex-row">
                       <div className="w-1/2 text-center">
                         <div className="rounded-full p-1">
-                        <select 
-                        className="rounded-full p-1 w-full"
-                        value={nomeCliente}
-                            onChange={(e) => setNomeCliente(e.target.value)}>
-                          <option value="Nome do Cliente">Nome do Cliente</option>
-                          {emprestimoLista.length > 0 && emprestimoLista.map((animal) => (
-                              <>
-                              <option value={animal.label}>{animal.label}</option>
-                              </>
-                            ))}
-                        </select>
-                          {/* <Select
-                            items={emprestimoLista}
-                            label="Nome do Cliente"
-                            placeholder="Nome do Cliente"
-                            className="max-w-xs"
-                            value={nomeCliente}
-                            onChange={(e) => setNomeCliente(e.target.value)}
-                          >
-                            {(animal) => (
-                              <SelectItem key={animal.value}>
-                                {animal.label}
-                              </SelectItem>
-                            )}
-                          </Select> */}
+                          <select 
+                          className="rounded-full p-1 w-full"
+                          value={nomeCliente}
+                              onChange={(e) => setNomeCliente(e.target.value)}>
+                            <option value="Nome do Cliente">Nome do Cliente</option>
+                            {emprestimoLista.length > 0 && emprestimoLista.map((animal) => (
+                                <>
+                                <option value={animal.label}>{animal.label}</option>
+                                </>
+                              ))}
+                          </select>
                         </div>
                       </div>
                       <div className="w-1/2">
@@ -272,7 +296,7 @@ function EntradaSaida() {
                         </div>
                       </div>
                     </div>
-                    <Spacer y={4} />
+                    <Spacer y={1} />
                     <div className="flex flex-row">
                       <div className="w-1/2 text-center">
                         <div className="rounded-full p-1  w-full">
@@ -426,47 +450,19 @@ function EntradaSaida() {
                 </>
               )}
               <div className="w-1/2 text-center">
-                <div className="rounded-full p-2">
-                  <Input
-                    className="max-w-ml"
-                    placeholder="Nome do Cliente"
-                    type="text"
-                    value={nomeCliente}
-                    onChange={(e) => setNomeCliente(e.target.value)}
-                  />
-                </div>
-              </div>
-              <div className="w-1/2">
-                <div className="rounded-full p-1">
-                  <Input className="max-w-ml" type="date" />
-                </div>
-              </div>
-              <div className="w-1/2">
-                <div className="rounded-full p-1">
-                  <button
-                    type={"button"}
-                    onClick={() => {}}
-                    className="outline_btn"
-                  >
-                    <div className="flex flex-row px-2">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke-width="1.5"
-                        stroke="currentColor"
-                        className="w-6 h-6"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 01-.659 1.591l-5.432 5.432a2.25 2.25 0 00-.659 1.591v2.927a2.25 2.25 0 01-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 00-.659-1.591L3.659 7.409A2.25 2.25 0 013 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0112 3z"
-                        />
-                      </svg>
-                      Filtrar
-                    </div>
-                  </button>
-                </div>
+              <div className="rounded-full p-1">
+                          <select 
+                          className="rounded-full p-1 w-full"
+                          value={nomeCliente}
+                              onChange={(e) => setNomeCliente(e.target.value)}>
+                            <option value="Nome do Cliente">Nome do Cliente</option>
+                            {emprestimoLista.length > 0 && emprestimoLista.map((animal) => (
+                                <>
+                                <option value={animal.label}>{animal.label}</option>
+                                </>
+                              ))}
+                          </select>
+                        </div>
               </div>
             </div>
             <div className="w-[100px] rounded-full p-1 text-center mt-4">
