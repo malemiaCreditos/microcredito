@@ -2,31 +2,31 @@ import React from "react";
 import "./ts.css";
 import { useState, useEffect } from "react";
 import ExtractoPDF from "../components/ExtractoPDF";
-
-function Table1({ emprestimoLista }) {
+var extractoListaVolatel = [];
+function Table1({ emprestimoLista, entradaSaidaLista }) {
   const [extractoLista, setExtractoLista] = useState([]);
 
   function gatilhoTTT() {
     ExtractoPDF({
-      extractoLista
+      extractoListaVolatel,
       });
   }
 
-
   async function gerarExtracto(id) {
-    var extractoListaVolatel = [];
-    emprestimoLista.map((f) => {
+    extractoListaVolatel = [];
+    entradaSaidaLista.map((f) => {
       if (id === f.nomeCliente) {
+        console.log(f);
         extractoListaVolatel.push({
           _id: f._id,
           dataEmprestimo: f.dataEmprestimo,
           nomeCliente: f.nomeCliente,
           operacao: f.operacao,
           saldo: f.saldo,
+          saldo1: f.saldo1,
         });
       }      
-    });
-    setExtractoLista(extractoListaVolatel);
+    });   
     gatilhoTTT();
   }
   return (

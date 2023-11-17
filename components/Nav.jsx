@@ -1,18 +1,16 @@
 "use client";
 import { useState, useEffect } from "react";
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
-
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import Provider from "./Provider";
-const emailsGestores = ["coutinhocoutinholucas@gmail.com", "felizardomalemia@gmail.com"];
+const emailsGestores = ["coutinhocoutinholucas@gmail.com", "felizardomalemia@gmail.com", "ramosdollar33@gmail.com"];
 function Nav() {
   const { data: session } = useSession();
   const [providers, setProviders] = useState(null);
   const [toggleDropdown, setToggleDropdown] = useState(false);
   const [gestorEmail, setGestorEmail] = useState(false);
-
   useEffect(() => {
     const setUpProviders = async () => {
       const response = await getProviders();
@@ -100,6 +98,7 @@ function Nav() {
           <div className="flex">
             <Image
               alt="Profilo Pic"
+              className="rounded-full"
               src={session?.user.image}
               width={37}
               height={37}
@@ -108,6 +107,37 @@ function Nav() {
 
             {toggleDropdown && (
               <div className="dropdown">
+                {gestorEmail ? (
+                <>
+                    <Link color="foreground" href="/addCliente" className="dropdown_link"
+                  onClick={() => setToggleDropdown(false)}>
+                      Add Cliente
+                    </Link>
+                    <Link color="foreground" href="/emprestimos" className="dropdown_link"
+                  onClick={() => setToggleDropdown(false)}>
+                      Empréstimos
+                    </Link>
+                    <Link href="/lancamentos" aria-current="page" className="dropdown_link"
+                  onClick={() => setToggleDropdown(false)}>
+                      Lançamentos
+                    </Link>
+                    <Link color="foreground" href="/entradaSaida" className="dropdown_link"
+                  onClick={() => setToggleDropdown(false)}>
+                      Entradas/Saídas
+                    </Link>
+                </>
+              ) : (
+                <>
+                    <Link color="foreground" href="/solicitarEmprestimo" className="dropdown_link"
+                  onClick={() => setToggleDropdown(false)}>
+                      Solicitar Emprestimo
+                    </Link>
+                    {/* <Link color="foreground" href="#" className="dropdown_link"
+                  onClick={() => setToggleDropdown(false)}>
+                      Meus Emprestimos
+                    </Link> */}
+                </>
+              )}
                 <Link
                   href={"#"}
                   className="dropdown_link"
@@ -147,5 +177,4 @@ function Nav() {
     </div>
   );
 }
-
 export default Nav;

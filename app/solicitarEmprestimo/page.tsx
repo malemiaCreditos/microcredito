@@ -62,6 +62,7 @@ function SolicitarEmprestimo() {
   const [nUITA, setNUITA] = useState("");
   const [senha, setSenha] = useState("");
   const [dataNascimento, setDataNascimento] = useState("");
+  const [entradaSaidaLista, setEntradaSaidaLista] = useState([]);
   const [status, setStatus] = useState("");
   useEffect(() => {
     const fetchPosts = async () => {
@@ -315,164 +316,169 @@ function SolicitarEmprestimo() {
   return (
     <>
       {session?.user && (
-        <div className="glassmorphism">
-          {status === "Pendente" ? (
-            <>
-              <h2 className="text-center text-yellow-500 text-2xl">
-                Olá {nomeCompleto}
-              </h2>
-              <h2 className="text-center text-white text-2xl">
-                A sua solicitação de Emprestimo ainda está em avaliação,
-                entraremos em contacto através do contacto fornecido por si no
-                formulário de registro para mais informações...
-              </h2>
-            </>
-          ) : (
-            <>
-              {status === "Aprovado" ? (
-                <>
-                  <div className=" flex flex-col w-full">
-                    <div className="flex flex-col gap-4 w-full">
-                      <div className="bg-yellow-700">
-                          <div className="bg-yellow-800 py-4">
-                            <div className="">
-                              <Image
-                                className="rounded-full"
-                                alt="Profilo Pic"
-                                src={session?.user.image}
-                                width={80}
-                                height={80}
-                              />
+        <>
+          <div className="glassmorphism">
+            {status === "Pendente" ? (
+              <>
+                <h2 className="text-center text-yellow-500 text-2xl">
+                  Olá {nomeCompleto}
+                </h2>
+                <h2 className="text-center text-white text-2xl">
+                  A sua solicitação de Emprestimo ainda está em avaliação,
+                  entraremos em contacto através do contacto fornecido por si no
+                  formulário de registro para mais informações...
+                </h2>
+              </>
+            ) : (
+              <>
+                {status === "Aprovado" ? (
+                  <>
+                    <div className=" flex flex-col w-full">
+                      <div className="flex flex-col gap-4 w-full">
+                        <div className="bg-yellow-700">
+                            <div className="bg-yellow-800 py-4">
+                              <div className="">
+                                <Image
+                                  className="rounded-full"
+                                  alt="Profilo Pic"
+                                  src={session?.user.image}
+                                  width={80}
+                                  height={80}
+                                />
+                              </div>
+                                
+                                <div className="flex flex-col ml-2">
+                                  <p className="text-lg">{nomeCompleto}</p>
+                                  <p className="text-small text-default-500">
+                                    {session?.user.email}
+                                  </p>
+                                </div>
+                            </div>
+                            <Divider />
+                            <div className="ml-2">
+                            <p>
+                                {" "}
+                                <small className="font-bold text-lg">
+                                  Status:
+                                </small>{" "}
+                                {status}
+                              </p>
+                              <p>
+                                {" "}
+                                <small className="font-bold text-lg">
+                                  Contacto:
+                                </small>{" "}
+                                {contacto}
+                              </p>
+                              <p>
+                                {" "}
+                                <small className="font-bold text-lg">
+                                  Fonte de Rendimento:
+                                </small>{" "}
+                                {fonteRendimento}
+                              </p>
+                              <p>
+                                {" "}
+                                <small className="font-bold text-lg">
+                                  Garantias do Emprestimo:
+                                </small>{" "}
+                                {garantias}
+                              </p>
+                              <p className="flex flex-row gap-4">
+                                {" "}
+                                <small className="font-bold text-lg">
+                                  Pagar a Parcela:
+                                </small>{" "}
+                                <div className="bg-orange-600 rounded-full p-1">
+                                  <button type="button" onClick={() => {}}>
+                                    <div className="px-2">Via Banco</div>
+                                  </button>
+                                </div>
+                              </p>
                             </div>
                               
-                              <div className="flex flex-col ml-2">
-                                <p className="text-lg">{nomeCompleto}</p>
-                                <p className="text-small text-default-500">
-                                  {session?.user.email}
-                                </p>
-                              </div>
-                          </div>
-                          <Divider />
-                          <div className="ml-2">
-                          <p>
-                              {" "}
-                              <small className="font-bold text-lg">
-                                Status:
-                              </small>{" "}
-                              {status}
-                            </p>
-                            <p>
-                              {" "}
-                              <small className="font-bold text-lg">
-                                Contacto:
-                              </small>{" "}
-                              {contacto}
-                            </p>
-                            <p>
-                              {" "}
-                              <small className="font-bold text-lg">
-                                Fonte de Rendimento:
-                              </small>{" "}
-                              {fonteRendimento}
-                            </p>
-                            <p>
-                              {" "}
-                              <small className="font-bold text-lg">
-                                Garantias do Emprestimo:
-                              </small>{" "}
-                              {garantias}
-                            </p>
-                            <p className="flex flex-row gap-4">
-                              {" "}
-                              <small className="font-bold text-lg">
-                                Pagar a Parcela:
-                              </small>{" "}
-                              <div className="bg-orange-600 rounded-full p-1">
-                                <button type="button" onClick={() => {}}>
-                                  <div className="px-2">Via Banco</div>
-                                </button>
-                              </div>
-                            </p>
-                          </div>
-                            
-                          <Divider />
-                          <div className="flex flex-row justify-between bg-yellow-800 py-4 px-2">
-                              <Link href="#">
-                                <p className="font-bold text-black text-2xl">
-                                  Emprestimo:{" "}
-                                  {Intl.NumberFormat("de-DE", {
-                                    style: "currency",
-                                    currency: "MZN",
-                                  }).format(parseFloat(saldo))}
-                                </p>
-                              </Link>
-                              <div className="bg-orange-600 rounded-full p-1">
-                                <button type="button" onClick={() => PDFContrato({
-                                  nomeCompleto, 
-                                  bI,
-                                  bIA, 
-                                  cidade,
-                                  cidadeA,
-                                  distrito,
-                                  distritoA, 
-                                  bairro,
-                                  bairroA,
-                                  quarteirao,
-                                  quarteiraoA,
-                                  numeroCasa,
-                                  numeroCasaA,
-                                  fonteRendimento,
-                                  contacto,
-                                  nUIT,
-                                  nUITA,
-                                  saldo,
-                                  nomeCompletoA,
-                                  estadoCivil,
-                                  estadoCivilA,
-                                  contactoA
-                                  })}>
-                                  <div className="px-2">Contrato</div>
-                                </button>
-                              </div>
-                          </div>
+                            <Divider />
+                            <div className="flex flex-row justify-between bg-yellow-800 py-2 px-2">
+                                <Link href="#">
+                                  <p className="font-bold text-black">
+                                    Emprestimo:{" "}
+                                    {Intl.NumberFormat("de-DE", {
+                                      style: "currency",
+                                      currency: "MZN",
+                                    }).format(parseFloat(saldo))}
+                                  </p>
+                                </Link>
+                                <div className="bg-orange-600 p-1">
+                                  <button type="button" onClick={() => PDFContrato({
+                                    nomeCompleto, 
+                                    bI,
+                                    bIA, 
+                                    cidade,
+                                    cidadeA,
+                                    distrito,
+                                    distritoA, 
+                                    bairro,
+                                    bairroA,
+                                    quarteirao,
+                                    quarteiraoA,
+                                    numeroCasa,
+                                    numeroCasaA,
+                                    fonteRendimento,
+                                    contacto,
+                                    nUIT,
+                                    nUITA,
+                                    saldo,
+                                    nomeCompletoA,
+                                    estadoCivil,
+                                    estadoCivilA,
+                                    contactoA
+                                    })}>
+                                      <div className="flex flex-row">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
+                                          <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m.75 12l3 3m0 0l3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                                        </svg>
+                                        Contrato
+                                      </div>
+                                  </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="flex text-center w-full">
+                          <Table1 emprestimoLista={emprestimoLista} entradaSaidaLista={entradaSaidaLista}  />
+                        </div>
                       </div>
-                      <div className="flex text-center w-full">
-                        <Table1 emprestimoLista={emprestimoLista} />
-                      </div>
+                      <div></div>
                     </div>
-                    <div></div>
-                  </div>
-                </>
-              ) : (
-                <>
-                  {formularioEnviado ? (
-                    <>
-                      <h2 className="text-center text-yellow-500 text-2xl">
-                        O Fomulário de Pré-Registro Para Solicitação de
-                        Emprestimo Foi Enviado Com Sucesso
-                      </h2>
-                      <h2 className="text-center text-white text-2xl">
-                        Estamos a avaliar a sua solicitação de Emprestimo,
-                        entraremos em contacto através do contacto fornecido por
-                        si no formulário de registro para mais informações...
-                      </h2>
-                    </>
-                  ) : (
-                    <>
-                      <div className="w-full flex justify-center content-center">
-                        <div className="flex flex-row w-full gap-4 justify-center">
-                          <div className="w-4/5">
-                            <h2 className="text-center text-yellow-500 text-2xl">
-                              Fomulário de Pré-Registro Para Solicitação de
-                              Emprestimo
-                            </h2>
-                                <Spacer y={1} />
-                                <div className="flex flex-row">
-                                  <div className="w-1/2 text-center">
-                                    <div className="rounded-full p-1">
+                  </>
+                ) : (
+                  <>
+                    {formularioEnviado ? (
+                      <>
+                        <h2 className="text-center text-black text-2xl">
+                          O Fomulário de Pré-Registro Para Solicitação de
+                          Emprestimo Foi Enviado Com Sucesso
+                        </h2>
+                        <h2 className="text-center text-black text-2xl">
+                          Estamos a avaliar a sua solicitação de Emprestimo,
+                          entraremos em contacto através do contacto fornecido por
+                          si no formulário de registro para mais informações...
+                        </h2>
+                      </>
+                    ) : (
+                      <>
+                        <div className="w-full flex justify-center content-center">
+                          <div className="flex flex-row w-full gap-4 justify-center">
+                            <div className="w-full">
+                              <h2 className="text-center text-white text-2xl">
+                                Fomulário de Pré-Registro Para Solicitação de
+                                Emprestimo
+                              </h2>
+                                  <Spacer y={1} />
+                                  <div className="flex flex-col md:flex-row sm:flex-row">
+                                    <div className="w-full rounded-full p-1">
                                       <Input
-                                        className="max-w-ml"
                                         placeholder="Nome Completo"
+                                        fullWidth= {true}
                                         type="text"
                                         value={nomeCompleto}
                                         onChange={(e) =>
@@ -480,511 +486,525 @@ function SolicitarEmprestimo() {
                                         }
                                       />
                                     </div>
-                                  </div>
-                                  <div className="w-1/2 text-center">
-                                    <div className="rounded-full p-1">
-                                      <Input
-                                        className="max-w-ml"
-                                        placeholder="Número de BI"
-                                        type="number"
-                                        value={bI}
-                                        onChange={(e) => setBI(e.target.value)}
-                                      />
-                                    </div>
-                                  </div>
-                                  <div className="w-1/2 text-center">
-                                    <div className="rounded-full p-1">
-                                      <Input
-                                        className="max-w-ml"
-                                        placeholder="NUIT"
-                                        type="number"
-                                        value={nUIT}
-                                        onChange={(e) =>
-                                          setNUIT(e.target.value)
-                                        }
-                                      />
-                                    </div>
-                                  </div>
-                                  <div className="w-1/2 text-center">
-                                    <div className="rounded-full p-1">
-                                      <Input
-                                        className="max-w-ml"
-                                        placeholder="Contacto"
-                                        type="number"
-                                        value={contacto}
-                                        onChange={(e) =>
-                                          setContacto(e.target.value)
-                                        }
-                                      />
-                                    </div>
-                                  </div>
-                                </div>
-                                <Spacer y={2} />
-                                <div className="flex flex-row">
-                                  <div className="w-full text-center">
-                                    <div className="rounded-full p-1">
-                                      <div className="flex flex-col">
-                                        <h2 className="text-center text-white w-full">
-                                          Data de Nascimento:
-                                        </h2>
+                                    <div className="w-full">
+                                      <div className="rounded-full p-1">
                                         <Input
-                                          className="max-w-ml"
-                                          placeholder="Saldo"
-                                          type="date"
-                                          value={dataNascimento}
-                                          onChange={(e) =>
-                                            setDataNascimento(e.target.value)
-                                          }
-                                        />
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div className="w-full text-center">
-                                    <div className="rounded-full p-1">
-                                      <div className="flex flex-row">
-                                      <select 
-                                        className="rounded-full p-1 w-full"
-                                        value={genero2}
-                                        onChange={(e) =>
-                                        setGenero2(e.target.value)
-                                        }>
-                                          <option value="Gênero">Gênero</option>
-                                          {genero.length > 0 && genero.map((animal) => (
-                                            <>
-                                              <option value={animal.label}>{animal.label}</option>
-                                            </>
-                                          ))}
-                                        </select>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div className="w-full text-center">
-                                    <div className="rounded-full p-1">
-                                      <div className="flex flex-row">
-                                      <select 
-                                        className="rounded-full p-1 w-full"
-                                        value={estadoCivil}
-                                        onChange={(e) =>
-                                        setEstadoCivil(e.target.value)
-                                        }>
-                                          <option value="Estado Civil">Estado Civil</option>
-                                          {estadoCivild.length > 0 && estadoCivild.map((animal) => (
-                                            <>
-                                              <option value={animal.label}>{animal.label}</option>
-                                            </>
-                                          ))}
-                                        </select>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div className="w-full text-center">
-                                    <div className="rounded-full p-1">
-                                      <div className="flex flex-col">
-                                        <Input
-                                          className="max-w-ml"
-                                          placeholder="Senha"
-                                          type="password"
-                                          value={senha}
-                                          onChange={(e) =>
-                                            setSenha(e.target.value)
-                                          }
-                                        />
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                                <Spacer y={2} />
-                                <div className="flex flex-row">
-                                  <div className="w-full text-center">
-                                    <div className="rounded-full p-1">
-                                      <div className="flex flex-col">
-                                        <Input
-                                          className="max-w-ml"
-                                          placeholder="Endereço"
-                                        type="text"
-                                        value={endereco}
-                                        onChange={(e) =>
-                                          setEndereco(e.target.value)
-                                        }
-                                        />
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div className="w-full text-center">
-                                    <div className="rounded-full p-1">
-                                      <div className="flex flex-col">
-                                        <Input
-                                          className="max-w-ml"
-                                          placeholder="Quarteirão"
-                                          type="text"
-                                          value={quarteirao}
-                                          onChange={(e) =>
-                                            setQuarteirao(e.target.value)
-                                          }
-                                        />
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div className="w-full text-center">
-                                    <div className="rounded-full p-1">
-                                      <div className="flex flex-col">
-                                        <Input
-                                          className="max-w-ml"
-                                          placeholder="Número da Casa"
-                                          type="text"
-                                          value={numeroCasa}
-                                          onChange={(e) =>
-                                            setNumeroCasa(e.target.value)
-                                          }
-                                        />
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                                <Spacer y={2} />
-                                <div className="flex flex-row">
-                                  <div className="w-1/2 text-center">
-                                    <div className="rounded-full p-1">
-                                      <Input
-                                        className="max-w-ml"
-                                        placeholder="Bairro"
-                                        type="text"
-                                        value={bairro}
-                                        onChange={(e) =>
-                                          setBairro(e.target.value)
-                                        }
-                                      />
-                                    </div>
-                                  </div>
-                                  <div className="w-1/2 text-center">
-                                    <div className="rounded-full p-1">
-                                      <Input
-                                        className="max-w-ml"
-                                        placeholder="Cidade"
-                                        type="text"
-                                        value={cidade}
-                                        onChange={(e) =>
-                                          setCidade(e.target.value)
-                                        }
-                                      />
-                                    </div>
-                                  </div>
-                                  <div className="w-1/2 text-center">
-                                    <div className="rounded-full p-1">
-                                      <Input
-                                        className="max-w-ml"
-                                        placeholder="Distrito"
-                                        type="text"
-                                        value={distrito}
-                                        onChange={(e) =>
-                                          setDistrito(e.target.value)
-                                        }
-                                      />
-                                    </div>
-                                  </div>
-                                  <div className="w-1/2 text-center">
-                                    <div className="rounded-full p-1">
-                                      <Input
-                                        className="max-w-ml"
-                                        placeholder="Provincia"
-                                        type="text"
-                                        value={provincia}
-                                        onChange={(e) =>
-                                          setProvincia(e.target.value)
-                                        }
-                                      />
-                                    </div>
-                                  </div>
-                                </div>
-                                <Spacer y={2} />
-                                <div className="flex flex-row">
-                                  <div className="w-full text-center">
-                                    <div className="rounded-full p-1">
-                                      <div className="flex flex-col">
-                                        <Input
-                                          className="max-w-ml"
-                                          placeholder="Saldo Solicitado"
+                                          placeholder="Número de BI"
+                                          fullWidth= {true}
                                           type="number"
-                                          value={saldo}
+                                          value={bI}
+                                          onChange={(e) => setBI(e.target.value)}
+                                        />
+                                      </div>
+                                    </div>
+                                    <div className="w-full">
+                                      <div className="rounded-full p-1">
+                                        <Input
+                                          placeholder="NUIT"
+                                          fullWidth= {true}
+                                          type="number"
+                                          value={nUIT}
                                           onChange={(e) =>
-                                            setSaldo(e.target.value)
+                                            setNUIT(e.target.value)
+                                          }
+                                        />
+                                      </div>
+                                    </div>
+                                    <div className="w-full">
+                                      <div className="rounded-full p-1">
+                                        <Input
+                                          placeholder="Contacto"
+                                          fullWidth= {true}
+                                          type="number"
+                                          value={contacto}
+                                          onChange={(e) =>
+                                            setContacto(e.target.value)
                                           }
                                         />
                                       </div>
                                     </div>
                                   </div>
-                                  <div className="w-full text-center">
-                                    <div className="rounded-full p-1">
-                                      <div className="flex flex-col">
-                                        <Input
-                                          className="max-w-ml"
-                                          placeholder="Qual é a sua fonte de rendimento mensal?"
-                                          type="Text"
-                                          value={fonteRendimento}
+                                  <Spacer y={2} />
+                                  <div className="flex flex-col md:flex-row sm:flex-row">
+                                    <div className="w-full">
+                                      <div className="rounded-full p-1">
+                                        <div className="flex flex-col">
+                                          <h2 className="text-center text-white w-full">
+                                            Data de Nascimento:
+                                          </h2>
+                                          <Input
+                                            className="max-w-ml"
+                                            placeholder="Saldo"
+                                            type="date"
+                                            value={dataNascimento}
+                                            onChange={(e) =>
+                                              setDataNascimento(e.target.value)
+                                            }
+                                          />
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div className="w-full text-center">
+                                      <div className="rounded-full p-1">
+                                        <div className="flex flex-row">
+                                        <select 
+                                          className="rounded-full p-1 w-full"
+                                          value={genero2}
                                           onChange={(e) =>
-                                            setFonteRendimento(e.target.value)
-                                          }
-                                        />
+                                          setGenero2(e.target.value)
+                                          }>
+                                            <option value="Gênero">Gênero</option>
+                                            {genero.length > 0 && genero.map((animal) => (
+                                              <>
+                                                <option value={animal.label}>{animal.label}</option>
+                                              </>
+                                            ))}
+                                          </select>
+                                        </div>
                                       </div>
                                     </div>
-                                  </div>
-                                  <div className="w-full text-center">
-                                    <div className="rounded-full p-1">
-                                      <div className="flex flex-col">
-                                        <Input
-                                          className="max-w-ml"
-                                          placeholder="Descreva as garantias de pagamento do saldo solicitado por si...."
-                                          value={garantias}
+                                    <div className="w-full text-center">
+                                      <div className="rounded-full p-1">
+                                        <div className="flex flex-row">
+                                        <select 
+                                          className="rounded-full p-1 w-full"
+                                          value={estadoCivil}
                                           onChange={(e) =>
-                                            setGarantias(e.target.value)
-                                          }
-                                        />
+                                          setEstadoCivil(e.target.value)
+                                          }>
+                                            <option value="Estado Civil">Estado Civil</option>
+                                            {estadoCivild.length > 0 && estadoCivild.map((animal) => (
+                                              <>
+                                                <option value={animal.label}>{animal.label}</option>
+                                              </>
+                                            ))}
+                                          </select>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div className="w-full text-center">
+                                      <div className="rounded-full p-1">
+                                        <div className="flex flex-col">
+                                          <Input
+                                            className="max-w-ml"
+                                            placeholder="Senha"
+                                            type="password"
+                                            value={senha}
+                                            onChange={(e) =>
+                                              setSenha(e.target.value)
+                                            }
+                                          />
+                                        </div>
                                       </div>
                                     </div>
                                   </div>
-                                </div>
-                                <Spacer y={1} />
-                              <Divider />
-                              <h2 className="text-center text-white text-2xl">
-                                Dados do Avalista
-                              </h2>
-                              <Spacer y={1} />
-                                <div className="flex flex-row">
-                                  <div className="w-1/2 text-center">
-                                    <div className="rounded-full p-1">
-                                      <Input
-                                        className="max-w-ml"
-                                        placeholder="Nome Completo"
-                                        type="text"
-                                        value={nomeCompletoA}
-                                        onChange={(e) =>
-                                          setNomeCompletoA(e.target.value)
-                                        }
-                                      />
-                                    </div>
-                                  </div>
-                                  <div className="w-1/2 text-center">
-                                    <div className="rounded-full p-1">
-                                      <Input
-                                        className="max-w-ml"
-                                        placeholder="Número de BI"
-                                        type="number"
-                                        value={bIA}
-                                        onChange={(e) => setBIA(e.target.value)}
-                                      />
-                                    </div>
-                                  </div>
-                                  <div className="w-1/2 text-center">
-                                    <div className="rounded-full p-1">
-                                      <Input
-                                        className="max-w-ml"
-                                        placeholder="NUIT"
-                                        type="number"
-                                        value={nUITA}
-                                        onChange={(e) =>
-                                          setNUITA(e.target.value)
-                                        }
-                                      />
-                                    </div>
-                                  </div>
-                                  <div className="w-1/2 text-center">
-                                    <div className="rounded-full p-1">
-                                      <Input
-                                        className="max-w-ml"
-                                        placeholder="Contacto"
-                                        type="number"
-                                        value={contactoA}
-                                        onChange={(e) =>
-                                          setContactoA(e.target.value)
-                                        }
-                                      />
-                                    </div>
-                                  </div>
-                                </div>
-                                <Spacer y={2} />
-                                <div className="flex flex-row">
-                                  <div className="w-full text-center">
-                                    <div className="rounded-full p-1">
-                                      <div className="flex flex-row">
-                                      <select 
-                                        className="rounded-full p-1 w-full"
-                                        value={genero2A}
-                                        onChange={(e) =>
-                                        setGenero2A(e.target.value)
-                                        }>
-                                          <option value="Gênero">Gênero</option>
-                                          {genero.length > 0 && genero.map((animal) => (
-                                            <>
-                                              <option value={animal.label}>{animal.label}</option>
-                                            </>
-                                          ))}
-                                        </select>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div className="w-full text-center">
-                                    <div className="rounded-full p-1">
-                                      <div className="flex flex-row">
-                                      <select 
-                                        className="rounded-full p-1 w-full"
-                                        value={estadoCivilA}
-                                        onChange={(e) =>
-                                        setEstadoCivilA(e.target.value)
-                                        }>
-                                          <option value="Estado Civil">Estado Civil</option>
-                                          {estadoCivild.length > 0 && estadoCivild.map((animal) => (
-                                            <>
-                                              <option value={animal.label}>{animal.label}</option>
-                                            </>
-                                          ))}
-                                        </select>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div className="w-full text-center">
-                                    <div className="rounded-full p-1">
-                                      <div className="flex flex-col">
-                                        <Input
-                                          className="max-w-ml"
-                                          placeholder="Endereço"
-                                        type="text"
-                                        value={enderecoA}
-                                        onChange={(e) =>
-                                          setEnderecoA(e.target.value)
-                                        }
-                                        />
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div className="w-full text-center">
-                                    <div className="rounded-full p-1">
-                                      <div className="flex flex-col">
-                                        <Input
-                                          className="max-w-ml"
-                                          placeholder="Quarteirão"
+                                  <Spacer y={2} />
+                                  <div className="flex flex-col md:flex-row sm:flex-row">
+                                    <div className="w-full text-center">
+                                      <div className="rounded-full p-1">
+                                        <div className="flex flex-col">
+                                          <Input
+                                            className="max-w-ml"
+                                            placeholder="Endereço"
                                           type="text"
-                                          value={quarteiraoA}
+                                          value={endereco}
                                           onChange={(e) =>
-                                            setQuarteiraoA(e.target.value)
+                                            setEndereco(e.target.value)
                                           }
-                                        />
+                                          />
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div className="w-full text-center">
+                                      <div className="rounded-full p-1">
+                                        <div className="flex flex-col">
+                                          <Input
+                                            className="max-w-ml"
+                                            placeholder="Quarteirão"
+                                            type="text"
+                                            value={quarteirao}
+                                            onChange={(e) =>
+                                              setQuarteirao(e.target.value)
+                                            }
+                                          />
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div className="w-full text-center">
+                                      <div className="rounded-full p-1">
+                                        <div className="flex flex-col">
+                                          <Input
+                                            className="max-w-ml"
+                                            placeholder="Número da Casa"
+                                            type="text"
+                                            value={numeroCasa}
+                                            onChange={(e) =>
+                                              setNumeroCasa(e.target.value)
+                                            }
+                                          />
+                                        </div>
                                       </div>
                                     </div>
                                   </div>
-                                  <div className="w-full text-center">
-                                    <div className="rounded-full p-1">
-                                      <div className="flex flex-col">
+                                  <Spacer y={2} />
+                                  <div className="flex flex-col md:flex-row sm:flex-row">
+                                    <div className="w-full text-center">
+                                      <div className="rounded-full p-1">
                                         <Input
                                           className="max-w-ml"
-                                          placeholder="Número da Casa"
+                                          placeholder="Bairro"
+                                          fullWidth= {true}
                                           type="text"
-                                          value={numeroCasaA}
+                                          value={bairro}
                                           onChange={(e) =>
-                                            setNumeroCasaA(e.target.value)
+                                            setBairro(e.target.value)
+                                          }
+                                        />
+                                      </div>
+                                    </div>
+                                    <div className="w-full text-center">
+                                      <div className="rounded-full p-1">
+                                        <Input
+                                          className="max-w-ml"
+                                          placeholder="Cidade"
+                                          fullWidth= {true}
+                                          type="text"
+                                          value={cidade}
+                                          onChange={(e) =>
+                                            setCidade(e.target.value)
+                                          }
+                                        />
+                                      </div>
+                                    </div>
+                                    <div className="w-full text-center">
+                                      <div className="rounded-full p-1">
+                                        <Input
+                                          className="max-w-ml"
+                                          placeholder="Distrito"
+                                          fullWidth= {true}
+                                          type="text"
+                                          value={distrito}
+                                          onChange={(e) =>
+                                            setDistrito(e.target.value)
+                                          }
+                                        />
+                                      </div>
+                                    </div>
+                                    <div className="w-full text-center">
+                                      <div className="rounded-full p-1">
+                                        <Input
+                                          className="max-w-ml"
+                                          placeholder="Provincia"
+                                          fullWidth= {true}
+                                          type="text"
+                                          value={provincia}
+                                          onChange={(e) =>
+                                            setProvincia(e.target.value)
                                           }
                                         />
                                       </div>
                                     </div>
                                   </div>
-                                </div>
-                                <Spacer y={2} />
-                                <div className="flex flex-row">
-                                  <div className="w-1/2 text-center">
-                                    <div className="rounded-full p-1">
-                                      <Input
-                                        className="max-w-ml"
-                                        placeholder="Bairro"
-                                        type="text"
-                                        value={bairroA}
-                                        onChange={(e) =>
-                                          setBairroA(e.target.value)
-                                        }
-                                      />
-                                    </div>
-                                  </div>
-                                  <div className="w-1/2 text-center">
-                                    <div className="rounded-full p-1">
-                                      <Input
-                                        className="max-w-ml"
-                                        placeholder="Cidade"
-                                        type="text"
-                                        value={cidadeA}
-                                        onChange={(e) =>
-                                          setCidadeA(e.target.value)
-                                        }
-                                      />
-                                    </div>
-                                  </div>
-                                  <div className="w-1/2 text-center">
-                                    <div className="rounded-full p-1">
-                                      <Input
-                                        className="max-w-ml"
-                                        placeholder="Distrito"
-                                        type="text"
-                                        value={distritoA}
-                                        onChange={(e) =>
-                                          setDistritoA(e.target.value)
-                                        }
-                                      />
-                                    </div>
-                                  </div>
-                                  <div className="w-1/2 text-center">
-                                    <div className="rounded-full p-1">
-                                      <Input
-                                        className="max-w-ml"
-                                        placeholder="Provincia"
-                                        type="text"
-                                        value={provinciaA}
-                                        onChange={(e) =>
-                                          setProvinciaA(e.target.value)
-                                        }
-                                      />
-                                    </div>
-                                  </div>
-                                </div>
-                              <Spacer y={1} />
-                              <Divider />
-                              <Spacer y={1} />
-                  <div className="flex flex-row gap-4">
-                  <div className="w-[120px]">
-                                  <div className="bg-black rounded-full p-1 text-center">
-                                    <button
-                                      type={"button"}
-                                      onClick={() => novoLancamento()}
-                                      className="outline_btn"
-                                    >
-                                      <div className="flex flex-row p-1">
-                                        {processando ? (
-                                          <>
-                                            {/* <CircularProgress
-                                              color="warning"
-                                              aria-label="Loading..."
-                                            /> */}
-                                          </>
-                                        ) : (
-                                          <><div className="text-white">Confirmar</div></>
-                                        )}
+                                  <Spacer y={2} />
+                                  <div className="flex flex-col md:flex-row sm:flex-row">
+                                    <div className="w-full text-center">
+                                      <div className="rounded-full p-1">
+                                        <div className="flex flex-col">
+                                          <Input
+                                            className="max-w-ml"
+                                            placeholder="Saldo Solicitado"
+                                            type="number"
+                                            value={saldo}
+                                            onChange={(e) =>
+                                              setSaldo(e.target.value)
+                                            }
+                                          />
+                                        </div>
                                       </div>
-                                    </button>
+                                    </div>
+                                    <div className="w-full text-center">
+                                      <div className="rounded-full p-1">
+                                        <div className="flex flex-col">
+                                          <Input
+                                            className="max-w-ml"
+                                            placeholder="Qual é a sua fonte de rendimento mensal?"
+                                            type="Text"
+                                            value={fonteRendimento}
+                                            onChange={(e) =>
+                                              setFonteRendimento(e.target.value)
+                                            }
+                                          />
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div className="w-full text-center">
+                                      <div className="rounded-full p-1">
+                                        <div className="flex flex-col">
+                                          <Input
+                                            className="max-w-ml"
+                                            placeholder="Descreva as garantias de pagamento do saldo solicitado por si...."
+                                            value={garantias}
+                                            onChange={(e) =>
+                                              setGarantias(e.target.value)
+                                            }
+                                          />
+                                        </div>
+                                      </div>
+                                    </div>
                                   </div>
-                                </div>
-                                <h2 className="text-center text-white w-1/2">
-                                  A sua solicitação do emprestimo passará por um
-                                  processo de avaliação prévia! Será notificado
-                                  através do número de telemóvel...
-                                </h2>
-                  </div>
+                                  <Spacer y={2} />
                                 
+                                <h2 className="text-center text-white text-2xl">
+                                  Dados do Avalista
+                                </h2>
+                                <Divider />
+                                <Spacer y={1} />
+                                  <div className="flex flex-col md:flex-row sm:flex-row">
+                                    <div className="w-full text-center">
+                                      <div className="rounded-full p-1">
+                                        <Input
+                                          className="max-w-ml"
+                                          placeholder="Nome Completo"
+                                          type="text"
+                                          fullWidth= {true}
+                                          value={nomeCompletoA}
+                                          onChange={(e) =>
+                                            setNomeCompletoA(e.target.value)
+                                          }
+                                        />
+                                      </div>
+                                    </div>
+                                    <div className="w-full text-center">
+                                      <div className="rounded-full p-1">
+                                        <Input
+                                          className="max-w-ml"
+                                          placeholder="Número de BI"
+                                          type="number"
+                                          fullWidth= {true}
+                                          value={bIA}
+                                          onChange={(e) => setBIA(e.target.value)}
+                                        />
+                                      </div>
+                                    </div>
+                                    <div className="w-full text-center">
+                                      <div className="rounded-full p-1">
+                                        <Input
+                                          className="max-w-ml"
+                                          placeholder="NUIT"
+                                          type="number"
+                                          fullWidth= {true}
+                                          value={nUITA}
+                                          onChange={(e) =>
+                                            setNUITA(e.target.value)
+                                          }
+                                        />
+                                      </div>
+                                    </div>
+                                    <div className="w-full text-center">
+                                      <div className="rounded-full p-1">
+                                        <Input
+                                          className="max-w-ml"
+                                          placeholder="Contacto"
+                                          type="number"
+                                          fullWidth= {true}
+                                          value={contactoA}
+                                          onChange={(e) =>
+                                            setContactoA(e.target.value)
+                                          }
+                                        />
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <Spacer y={2} />
+                                  <div className="flex flex-col md:flex-row sm:flex-row">
+                                    <div className="w-full text-center">
+                                      <div className="rounded-full p-1">
+                                        <div className="flex flex-row">
+                                        <select 
+                                          className="rounded-full p-1 w-full"
+                                          value={genero2A}
+                                          onChange={(e) =>
+                                          setGenero2A(e.target.value)
+                                          }>
+                                            <option value="Gênero">Gênero</option>
+                                            {genero.length > 0 && genero.map((animal) => (
+                                              <>
+                                                <option value={animal.label}>{animal.label}</option>
+                                              </>
+                                            ))}
+                                          </select>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div className="w-full text-center">
+                                      <div className="rounded-full p-1">
+                                        <div className="flex flex-row">
+                                        <select 
+                                          className="rounded-full p-1 w-full"
+                                          value={estadoCivilA}
+                                          onChange={(e) =>
+                                          setEstadoCivilA(e.target.value)
+                                          }>
+                                            <option value="Estado Civil">Estado Civil</option>
+                                            {estadoCivild.length > 0 && estadoCivild.map((animal) => (
+                                              <>
+                                                <option value={animal.label}>{animal.label}</option>
+                                              </>
+                                            ))}
+                                          </select>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div className="w-full text-center">
+                                      <div className="rounded-full p-1">
+                                        <div className="flex flex-col">
+                                          <Input
+                                            className="max-w-ml"
+                                            placeholder="Endereço"
+                                          type="text"
+                                          value={enderecoA}
+                                          onChange={(e) =>
+                                            setEnderecoA(e.target.value)
+                                          }
+                                          />
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div className="w-full text-center">
+                                      <div className="rounded-full p-1">
+                                        <div className="flex flex-col">
+                                          <Input
+                                            className="max-w-ml"
+                                            placeholder="Quarteirão"
+                                            type="text"
+                                            value={quarteiraoA}
+                                            onChange={(e) =>
+                                              setQuarteiraoA(e.target.value)
+                                            }
+                                          />
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div className="w-full text-center">
+                                      <div className="rounded-full p-1">
+                                        <div className="flex flex-col">
+                                          <Input
+                                            className="max-w-ml"
+                                            placeholder="Número da Casa"
+                                            type="text"
+                                            value={numeroCasaA}
+                                            onChange={(e) =>
+                                              setNumeroCasaA(e.target.value)
+                                            }
+                                          />
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <Spacer y={2} />
+                                  <div className="flex flex-col md:flex-row sm:flex-row">
+                                    <div className="w-full text-center">
+                                      <div className="rounded-full p-1">
+                                        <Input
+                                          className="max-w-ml"
+                                          placeholder="Bairro"
+                                          type="text"
+                                          fullWidth= {true}
+                                          value={bairroA}
+                                          onChange={(e) =>
+                                            setBairroA(e.target.value)
+                                          }
+                                        />
+                                      </div>
+                                    </div>
+                                    <div className="w-full text-center">
+                                      <div className="rounded-full p-1">
+                                        <Input
+                                          className="max-w-ml"
+                                          placeholder="Cidade"
+                                          type="text"
+                                          fullWidth= {true}
+                                          value={cidadeA}
+                                          onChange={(e) =>
+                                            setCidadeA(e.target.value)
+                                          }
+                                        />
+                                      </div>
+                                    </div>
+                                    <div className="w-full text-center">
+                                      <div className="rounded-full p-1">
+                                        <Input
+                                          className="max-w-ml"
+                                          placeholder="Distrito"
+                                          type="text"
+                                          fullWidth= {true}
+                                          value={distritoA}
+                                          onChange={(e) =>
+                                            setDistritoA(e.target.value)
+                                          }
+                                        />
+                                      </div>
+                                    </div>
+                                    <div className="w-full text-center">
+                                      <div className="rounded-full p-1">
+                                        <Input
+                                          className="max-w-ml"
+                                          placeholder="Provincia"
+                                          type="text"
+                                          fullWidth= {true}
+                                          value={provinciaA}
+                                          onChange={(e) =>
+                                            setProvinciaA(e.target.value)
+                                          }
+                                        />
+                                      </div>
+                                    </div>
+                                  </div>
+                                <Spacer y={1} />
+                                <Divider />
+                                <Spacer y={1} />
+                                <div className="flex flex-row gap-4">
+                                  <div className="w-[120px]">
+                                    <div className="bg-black rounded-full p-1 text-center">
+                                      <button
+                                        type={"button"}
+                                        onClick={() => novoLancamento()}
+                                        className="outline_btn"
+                                      >
+                                        <div className="flex flex-row p-1">
+                                          {processando ? (
+                                            <>
+                                              {/* <CircularProgress
+                                                color="warning"
+                                                aria-label="Loading..."
+                                              /> */}
+                                            </>
+                                          ) : (
+                                            <><div className="text-white">Confirmar</div></>
+                                          )}
+                                        </div>
+                                      </button>
+                                    </div>
+                                  </div>
+                                  <h2 className="text-center text-black w-1/2">
+                                    A sua solicitação do emprestimo passará por um
+                                    processo de avaliação prévia! Será notificado
+                                    através do número de telemóvel sobre os paços subsequentes...
+                                  </h2>
+                                </div>
+                                <Spacer y={4} />
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </>
-                  )}
-                </>
-              )}
-            </>
-          )}
-        </div>
+                      </>
+                    )}
+                  </>
+                )}
+              </>
+            )}
+          </div>
+          <Spacer y={4} />
+        </>
       )}
     </>
   );
