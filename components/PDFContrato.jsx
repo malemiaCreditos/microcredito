@@ -31,7 +31,7 @@ async function PDFContrato({
   var datetime =
     currentdate.getDate() +
     " de " +
-    mesesList[(currentdate.getMonth() + 1)] +
+    mesesList[(currentdate.getMonth())] +
     " de " +
     currentdate.getFullYear();
   const imagemVarivel = await getBase64ImageFromURL("/assets/images/malemiaLogo.png");
