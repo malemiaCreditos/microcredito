@@ -232,7 +232,7 @@ async function PDFContrato({
         text: [
           {text: '1. O empréstimo solicitado pelo '},
           {text: 'MUTUÁRIO ', fontSize: 12, bold: true},
-          {text: 'será dividido em 26 parcelas.'},
+          {text: 'será dividido em 30 parcelas.'},
       ],
         style: 'bodyDoc',
         alignment: 'justify'
@@ -245,7 +245,7 @@ async function PDFContrato({
         text: [
           {text: '2. O '},
           {text: 'MUTUÁRIO ', fontSize: 12, bold: true},
-          {text: 'o obriga-se a pagar o empréstimo solicitado dentro de 26 dias uteis, contados a partir do dia seguinte à da data da assinatura do presente contrato.'},
+          {text: 'o obriga-se a pagar o empréstimo solicitado dentro de 30 dias uteis, contados a partir do dia seguinte à da data da assinatura do presente contrato.'},
       ],
         style: 'bodyDoc',
         alignment: 'justify'
