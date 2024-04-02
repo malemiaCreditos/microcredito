@@ -714,7 +714,7 @@ async function PDFContrato({
       },
       {
         width: 5,
-        text: "\n\n\n\n",
+        text: "\n\n\n\n\n\n\n",
       },
       {
         alignment: "justify",
