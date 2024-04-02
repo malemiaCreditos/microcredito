@@ -232,7 +232,7 @@ async function PDFContrato({
         text: [
           {text: '1. O empréstimo solicitado pelo '},
           {text: 'MUTUÁRIO ', fontSize: 12, bold: true},
-          {text: 'será dividido em 30 parcelas.'},
+          {text: 'será pago em uma parcela num período de trinta dias.'},
       ],
         style: 'bodyDoc',
         alignment: 'justify'
@@ -246,45 +246,6 @@ async function PDFContrato({
           {text: '2. O '},
           {text: 'MUTUÁRIO ', fontSize: 12, bold: true},
           {text: 'o obriga-se a pagar o empréstimo solicitado dentro de 30 dias uteis, contados a partir do dia seguinte à da data da assinatura do presente contrato.'},
-      ],
-        style: 'bodyDoc',
-        alignment: 'justify'
-      },
-      {
-        width: 5,
-        text: "\n",
-      },
-      {
-        text: [
-          {text: '3. O '},
-          {text: 'MUTUÁRIO ', fontSize: 12, bold: true},
-          {text: 'irá pagar o empréstimo todos os dias uteis correspondentes ao número de parcelas.'},
-      ],
-        style: 'bodyDoc',
-        alignment: 'justify'
-      },
-      {
-        width: 5,
-        text: "\n",
-      },
-      {
-        text: [
-          {text: '4. O '},
-          {text: 'MUTUÁRIO ', fontSize: 12, bold: true},
-          {text: 'deverá pagar 1 (uma) parcela a cada 24 horas após o pagamento da parcela anterior até ao fim de todas as parcelas.'},
-      ],
-        style: 'bodyDoc',
-        alignment: 'justify'
-      },
-      {
-        width: 5,
-        text: "\n",
-      },
-      {
-        text: [
-          {text: '5. Em casos de pagamento de parcelas em acumulado o '},
-          {text: 'MUTUÁRIO ', fontSize: 12, bold: true},
-          {text: 'voltará a pagar o empréstimo após “n” dias correspondente ao número de parcelas previamente pagas em acumulado.'},
       ],
         style: 'bodyDoc',
         alignment: 'justify'
@@ -364,7 +325,7 @@ async function PDFContrato({
         text: [
           {text: '3. Serão aplicadas multas ao '},
           {text: 'MUTUÁRIO ', fontSize: 12, bold: true},
-          {text: 'sempre que não se cumprir com o formato de pagamento estabelecido na Cláusula Terceira do Paragrafo 4 (Quatro) deste contrato.'},
+          {text: 'sempre que não se cumprir com o formato de pagamento estabelecido na Cláusula Terceira do Paragrafo 2 (Dois) deste contrato.'},
       ],
         style: 'bodyDoc',
         alignment: 'justify'
@@ -424,7 +385,7 @@ async function PDFContrato({
       },
       {
         text: [
-          {text: 'O pagamento referido no paragrafo, supra, desta Cláusula será efectuado por maio de transferência para as contas Bancarias ou Móvel do'},
+          {text: 'O pagamento referido no paragrafo, supra, desta Cláusula será efectuado por meio de transferência para as contas Bancarias ou Móvel do'},
           {text: 'MUTUANTE ', fontSize: 12, bold: true},
           {text: 'e/ou em Numerário.'},
       ],
@@ -587,9 +548,9 @@ async function PDFContrato({
       },
       {
         text: [
-          {text: '1. Para pagamentos em numerário o Agente de Cobranças deverá se deslocar até ao endereço do'},
+          {text: '1. Para pagamentos em numerário o Agente de Cobranças deverá se deslocar até ao endereço do '},
           {text: 'MUTUÁRIO ', fontSize: 12, bold: true},
-          {text: 'ara obter o valor do pagamento diário.'},
+          {text: 'para obter o valor do pagamento.'},
            ],
         style: 'bodyDoc',
         alignment: 'justify'
