@@ -245,7 +245,7 @@ async function PDFContrato({
         text: [
           {text: '2. O '},
           {text: 'MUTUÁRIO ', fontSize: 12, bold: true},
-          {text: 'o obriga-se a pagar o empréstimo solicitado dentro de 30 dias uteis, contados a partir do dia seguinte à da data da assinatura do presente contrato.'},
+          {text: 'obriga-se a pagar o empréstimo solicitado dentro de 30 dias uteis, contados a partir do dia seguinte à da data da assinatura do presente contrato.'},
       ],
         style: 'bodyDoc',
         alignment: 'justify'
